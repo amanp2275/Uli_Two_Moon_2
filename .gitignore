@@ -11,4 +11,6 @@ env/
 
 plots/
 real_nvp/plots/
-transformer_flows/plots/
+
+!transformer_flows/plots/
+!transformer_flows/plots/**
