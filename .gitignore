@@ -10,7 +10,9 @@ env/
 *.ckpt
 
 plots/
-real_nvp/plots/
 
 !transformer_flows/plots/
 !transformer_flows/plots/**
+
+!real_nvp/plots/
+!real_nvp/plots/**
