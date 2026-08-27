@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+
+.venv/
+venv/
+env/
+
+*.pt
+*.pth
+*.ckpt
+
+plots/
+real_nvp/plots/
+transformer_flows/plots/
