@@ -13,6 +13,7 @@ class TrainingConfig:
 	plot_dir: str | Path = "plots"
 	updates_per_epoch: int = 16
 	plot_batches: int = 32
+	test_batches: int = 32
 	device: str | None = None
 	conditional: bool = True
 	in_channels: int = 2

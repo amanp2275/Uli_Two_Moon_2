@@ -55,6 +55,8 @@ def save_plot(
 	generated: torch.Tensor,
 	generated_labels: torch.Tensor | None,
 	losses: list[float],
+	test_losses: list[float],
+	test_epochs: list[int],
 	epoch: int,
 	plot_dir: Path,
 ) -> None:
@@ -91,9 +93,11 @@ def save_plot(
 			alpha=0.8,
 		)
 		axes[1].set_title("Generated samples (conditional)")
-	axes[2].plot(range(1, len(losses) + 1), losses, color="black")
-	axes[2].set_title("Training loss")
+	axes[2].plot(range(1, len(losses) + 1), losses, color="black", label="Train")
+	axes[2].plot(test_epochs, test_losses, color="tab:orange", label="Test")
+	axes[2].set_title("Train/test loss")
 	axes[2].set_xlabel("Epoch")
+	axes[2].legend()
 	if generated_labels is None:
 		axes[3].axis("off")
 		axes[3].text(0.5, 0.5, "No class labels\n(unconditional model)", ha="center", va="center")
@@ -143,14 +147,15 @@ def train_two_moons(config: TrainingConfig) -> tuple[Model, list[float]]:
 	plot_dir = config.plot_dir
 	updates_per_epoch = config.updates_per_epoch
 	plot_batches = config.plot_batches
+	test_batches = config.test_batches
 	device = config.device
 	conditional = config.conditional
 	if batch_size < 1 or points_per_batch < 1 or epochs < 1:
 		raise ValueError("batch_size, points_per_batch, and epochs must be at least 1")
 	if plot_frequency < 1:
 		raise ValueError("plot_frequency must be at least 1")
-	if updates_per_epoch < 1 or plot_batches < 1:
-		raise ValueError("updates_per_epoch and plot_batches must be at least 1")
+	if updates_per_epoch < 1 or plot_batches < 1 or test_batches < 1:
+		raise ValueError("updates_per_epoch, plot_batches, and test_batches must be at least 1")
 
 	# Prefer the GPU automatically, while allowing explicit CPU/GPU selection.
 	selected_device = torch.device(device or ("cuda" if torch.cuda.is_available() else "cpu"))
@@ -169,6 +174,8 @@ def train_two_moons(config: TrainingConfig) -> tuple[Model, list[float]]:
 	).to(selected_device)
 	optimizer = torch.optim.Adam(model.parameters(), lr=config.learning_rate)
 	losses: list[float] = []
+	test_losses: list[float] = []
+	test_epochs: list[int] = []
 	plot_path = Path(plot_dir)
 	sequences_per_epoch = batch_size * updates_per_epoch
 	# Keep one fixed dataset and normalize it once for stable optimization.
@@ -183,6 +190,14 @@ def train_two_moons(config: TrainingConfig) -> tuple[Model, list[float]]:
 	data_mean = all_X.mean(dim=(0, 1), keepdim=True)
 	data_std = all_X.std(dim=(0, 1), keepdim=True).clamp_min(1e-6)
 	normalized_X = (all_X - data_mean) / data_std
+	test_X, test_labels = get_two_moons(
+		points_per_batch=points_per_batch,
+		num_batches=test_batches,
+		noise=noise,
+		seed=seed + 1,
+	)
+	test_X = (test_X.to(selected_device) - data_mean) / data_std
+	test_labels = test_labels.to(selected_device)
 
 	for epoch in range(1, epochs + 1):
 		model.train()
@@ -207,6 +222,9 @@ def train_two_moons(config: TrainingConfig) -> tuple[Model, list[float]]:
 		if epoch % plot_frequency == 0 or epoch == epochs:
 			model.eval()
 			with torch.no_grad():
+				test_z, _, test_logdet = model(test_X, test_labels if conditional else None)
+				test_losses.append(model.get_loss(test_z, test_logdet).item())
+				test_epochs.append(epoch)
 				# Evaluate on more sequences than one training batch for smoother plots.
 				plot_X, plot_labels = get_two_moons(
 					points_per_batch=points_per_batch,
@@ -221,7 +239,17 @@ def train_two_moons(config: TrainingConfig) -> tuple[Model, list[float]]:
 				# Sample in latent space, then use the learned inverse flow.
 				generated = model.reverse(torch.randn_like(plot_X), generated_labels)
 				generated = generated * data_std + data_mean
-				save_plot(plot_X * data_std + data_mean, plot_labels, generated, generated_labels, losses, epoch, plot_path)
+				save_plot(
+					plot_X * data_std + data_mean,
+					plot_labels,
+					generated,
+					generated_labels,
+					losses,
+					test_losses,
+					test_epochs,
+					epoch,
+					plot_path,
+				)
 			print(f"Epoch {epoch:03d}/{epochs}: loss={losses[-1]:.4f} ({selected_device})")
 
 	return model, losses

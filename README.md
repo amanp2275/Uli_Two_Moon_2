@@ -12,6 +12,10 @@ Experiments with normalizing flows on the two-moons dataset.
 - `transformer_flows/`: conditional and unconditional transformer-flow launchers.
 - `real_nvp/`: conditional and unconditional RealNVP launchers.
 
+Each training run creates a fixed training set and an independent held-out test
+set. Checkpoint plots include both train and test loss curves, allowing
+overfitting to be checked directly.
+
 ## Run training
 
 From the project root:

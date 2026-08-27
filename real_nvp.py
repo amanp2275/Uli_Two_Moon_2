@@ -18,6 +18,7 @@ class RealNVPConfig:
 	plot_dir: str | Path = "real_nvp_plots"
 	updates_per_epoch: int = 8
 	plot_batches: int = 32
+	test_batches: int = 32
 	device: str | None = None
 	conditional: bool = True
 	num_layers: int = 8
@@ -115,6 +116,8 @@ def train_two_moons(config: RealNVPConfig) -> tuple[RealNVP, list[float]]:
 		raise ValueError("batch_size, points_per_batch, and epochs must be at least 1")
 	if config.points_per_batch % 2:
 		raise ValueError("points_per_batch must be even for balanced classes")
+	if config.test_batches < 1:
+		raise ValueError("test_batches must be at least 1")
 
 	device = torch.device(config.device or ("cuda" if torch.cuda.is_available() else "cpu"))
 	if device.type == "cuda" and not torch.cuda.is_available():
@@ -131,7 +134,17 @@ def train_two_moons(config: RealNVPConfig) -> tuple[RealNVP, list[float]]:
 	data_mean = all_X.mean(dim=(0, 1), keepdim=True)
 	data_std = all_X.std(dim=(0, 1), keepdim=True).clamp_min(1e-6)
 	normalized_X = (all_X - data_mean) / data_std
+	test_X, test_labels = get_two_moons(
+		config.points_per_batch,
+		config.test_batches,
+		config.noise,
+		config.seed + 1,
+	)
+	test_X = (test_X.to(device) - data_mean) / data_std
+	test_labels = test_labels.to(device)
 	losses: list[float] = []
+	test_losses: list[float] = []
+	test_epochs: list[int] = []
 
 	for epoch in range(1, config.epochs + 1):
 		model.train()
@@ -151,12 +164,25 @@ def train_two_moons(config: RealNVPConfig) -> tuple[RealNVP, list[float]]:
 		if epoch % config.plot_frequency == 0 or epoch == config.epochs:
 			model.eval()
 			with torch.no_grad():
+				test_z, test_logdet = model(test_X, test_labels if config.conditional else None)
+				test_losses.append(model.get_loss(test_z, test_logdet).item())
+				test_epochs.append(epoch)
 				plot_X, plot_labels = get_two_moons(config.points_per_batch, config.plot_batches, config.noise, config.seed)
 				plot_X, plot_labels = plot_X.to(device), plot_labels.to(device)
 				generated_labels = plot_labels if config.conditional else None
 				generated = model.reverse(torch.randn_like(plot_X), generated_labels)
 				generated = generated * data_std + data_mean
-				save_plot(plot_X, plot_labels, generated, generated_labels, losses, epoch, Path(config.plot_dir))
+				save_plot(
+					plot_X,
+					plot_labels,
+					generated,
+					generated_labels,
+					losses,
+					test_losses,
+					test_epochs,
+					epoch,
+					Path(config.plot_dir),
+				)
 			print(f"Epoch {epoch:03d}/{config.epochs}: loss={losses[-1]:.4f} ({device})")
 
 	return model, losses
