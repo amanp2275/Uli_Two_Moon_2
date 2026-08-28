@@ -1,10 +1,12 @@
 from dataclasses import dataclass
 from pathlib import Path
+from copy import deepcopy
 
 import torch
 from torch import nn
 
-from train import get_two_moons, save_plot
+from dataset import load_or_generate_two_moons
+from train import save_plot
 
 
 @dataclass(frozen=True)
@@ -17,8 +19,12 @@ class RealNVPConfig:
 	seed: int = 7
 	plot_dir: str | Path = "real_nvp_plots"
 	updates_per_epoch: int = 8
+	dataset_num_batches: int = 512
+	dataset_path: str | Path = Path(__file__).parent / "two_moons_splits.pt"
 	plot_batches: int = 32
 	test_batches: int = 32
+	early_stopping_patience: int = 3
+	weight_decay: float = 1e-4
 	device: str | None = None
 	conditional: bool = True
 	num_layers: int = 8
@@ -127,34 +133,42 @@ def train_two_moons(config: RealNVPConfig) -> tuple[RealNVP, list[float]]:
 		torch.cuda.manual_seed_all(config.seed)
 
 	model = RealNVP(config.num_layers, config.hidden_features, config.conditional).to(device)
-	optimizer = torch.optim.Adam(model.parameters(), lr=config.learning_rate)
-	sequences_per_epoch = config.batch_size * config.updates_per_epoch
-	all_X, all_labels = get_two_moons(config.points_per_batch, sequences_per_epoch, config.noise, config.seed)
-	all_X, all_labels = all_X.to(device), all_labels.to(device)
-	data_mean = all_X.mean(dim=(0, 1), keepdim=True)
-	data_std = all_X.std(dim=(0, 1), keepdim=True).clamp_min(1e-6)
-	normalized_X = (all_X - data_mean) / data_std
-	test_X, test_labels = get_two_moons(
-		config.points_per_batch,
-		config.test_batches,
-		config.noise,
-		config.seed + 1,
+	optimizer = torch.optim.Adam(
+		model.parameters(), lr=config.learning_rate, weight_decay=config.weight_decay
 	)
-	test_X = (test_X.to(device) - data_mean) / data_std
-	test_labels = test_labels.to(device)
+	splits = load_or_generate_two_moons(
+		path=config.dataset_path,
+		points_per_batch=config.points_per_batch,
+		num_batches=config.dataset_num_batches,
+		noise=config.noise,
+		seed=config.seed,
+		train_fraction=0.8,
+		validation_fraction=0.1,
+	).to(device)
+	data_mean = splits.train_X.mean(dim=(0, 1), keepdim=True)
+	data_std = splits.train_X.std(dim=(0, 1), keepdim=True).clamp_min(1e-6)
+	normalized_train_X = (splits.train_X - data_mean) / data_std
+	normalized_validation_X = (splits.validation_X - data_mean) / data_std
+	normalized_test_X = (splits.test_X - data_mean) / data_std
+	train_sequences = normalized_train_X.size(0)
+	if train_sequences < 1 or splits.validation_X.size(0) < 1 or splits.test_X.size(0) < 1:
+		raise ValueError("dataset_num_batches must provide non-empty train, validation, and test splits")
 	losses: list[float] = []
 	test_losses: list[float] = []
 	test_epochs: list[int] = []
+	best_validation_loss = float("inf")
+	best_state = deepcopy(model.state_dict())
+	stale_evaluations = 0
 
 	for epoch in range(1, config.epochs + 1):
 		model.train()
-		order = torch.randperm(sequences_per_epoch, device=device)
+		order = torch.randperm(train_sequences, device=device)
 		epoch_losses = []
-		for start in range(0, sequences_per_epoch, config.batch_size):
+		for start in range(0, train_sequences, config.batch_size):
 			indices = order[start : start + config.batch_size]
-			labels = all_labels[indices]
+			labels = splits.train_labels[indices]
 			optimizer.zero_grad()
-			z, logdet = model(normalized_X[indices], labels if config.conditional else None)
+			z, logdet = model(normalized_train_X[indices], labels if config.conditional else None)
 			loss = model.get_loss(z, logdet)
 			loss.backward()
 			optimizer.step()
@@ -164,16 +178,23 @@ def train_two_moons(config: RealNVPConfig) -> tuple[RealNVP, list[float]]:
 		if epoch % config.plot_frequency == 0 or epoch == config.epochs:
 			model.eval()
 			with torch.no_grad():
-				test_z, test_logdet = model(test_X, test_labels if config.conditional else None)
+				validation_z, validation_logdet = model(
+					normalized_validation_X,
+					splits.validation_labels if config.conditional else None,
+				)
+				validation_loss = model.get_loss(validation_z, validation_logdet).item()
+				test_z, test_logdet = model(
+					normalized_test_X, splits.test_labels if config.conditional else None
+				)
 				test_losses.append(model.get_loss(test_z, test_logdet).item())
 				test_epochs.append(epoch)
-				plot_X, plot_labels = get_two_moons(config.points_per_batch, config.plot_batches, config.noise, config.seed)
-				plot_X, plot_labels = plot_X.to(device), plot_labels.to(device)
+				plot_X = normalized_test_X[: config.plot_batches]
+				plot_labels = splits.test_labels[: config.plot_batches]
 				generated_labels = plot_labels if config.conditional else None
 				generated = model.reverse(torch.randn_like(plot_X), generated_labels)
 				generated = generated * data_std + data_mean
 				save_plot(
-					plot_X,
+					plot_X * data_std + data_mean,
 					plot_labels,
 					generated,
 					generated_labels,
@@ -183,8 +204,18 @@ def train_two_moons(config: RealNVPConfig) -> tuple[RealNVP, list[float]]:
 					epoch,
 					Path(config.plot_dir),
 				)
+			if validation_loss < best_validation_loss:
+				best_validation_loss = validation_loss
+				best_state = deepcopy(model.state_dict())
+				stale_evaluations = 0
+			else:
+				stale_evaluations += 1
+				if stale_evaluations >= config.early_stopping_patience:
+					print(f"Early stopping at epoch {epoch:03d}: validation loss stopped improving")
+					break
 			print(f"Epoch {epoch:03d}/{config.epochs}: loss={losses[-1]:.4f} ({device})")
 
+	model.load_state_dict(best_state)
 	return model, losses
 
 

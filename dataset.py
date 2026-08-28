@@ -142,4 +142,7 @@ def load_or_generate_two_moons(
 	if path is not None and Path(path).exists():
 		return TwoMoonsSplits.load(path)
 	points, labels = generate_two_moons(points_per_batch, num_batches, noise, seed)
-	return split_two_moons(points, labels, train_fraction, validation_fraction, seed)
+	splits = split_two_moons(points, labels, train_fraction, validation_fraction, seed)
+	if path is not None:
+		splits.save(path)
+	return splits

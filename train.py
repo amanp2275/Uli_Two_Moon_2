@@ -1,11 +1,13 @@
 from pathlib import Path
 from datetime import datetime
+from copy import deepcopy
 
 import matplotlib.pyplot as plt
 import torch
 from sklearn.datasets import make_moons
 
 from configuration import CONDITIONAL_CONFIG, TrainingConfig
+from dataset import load_or_generate_two_moons
 from Transformer_flow import Model
 
 
@@ -172,41 +174,43 @@ def train_two_moons(config: TrainingConfig) -> tuple[Model, list[float]]:
 		num_blocks=config.num_blocks,
 		num_classes=2 if conditional else 0,
 	).to(selected_device)
-	optimizer = torch.optim.Adam(model.parameters(), lr=config.learning_rate)
+	optimizer = torch.optim.Adam(
+		model.parameters(), lr=config.learning_rate, weight_decay=config.weight_decay
+	)
 	losses: list[float] = []
 	test_losses: list[float] = []
 	test_epochs: list[int] = []
 	plot_path = Path(plot_dir)
-	sequences_per_epoch = batch_size * updates_per_epoch
-	# Keep one fixed dataset and normalize it once for stable optimization.
-	all_X, all_labels = get_two_moons(
+	splits = load_or_generate_two_moons(
+		path=config.dataset_path,
 		points_per_batch=points_per_batch,
-		num_batches=sequences_per_epoch,
+		num_batches=config.dataset_num_batches,
 		noise=noise,
 		seed=seed,
+		train_fraction=0.8,
+		validation_fraction=0.1,
 	)
-	all_X = all_X.to(selected_device)
-	all_labels = all_labels.to(selected_device)
-	data_mean = all_X.mean(dim=(0, 1), keepdim=True)
-	data_std = all_X.std(dim=(0, 1), keepdim=True).clamp_min(1e-6)
-	normalized_X = (all_X - data_mean) / data_std
-	test_X, test_labels = get_two_moons(
-		points_per_batch=points_per_batch,
-		num_batches=test_batches,
-		noise=noise,
-		seed=seed + 1,
-	)
-	test_X = (test_X.to(selected_device) - data_mean) / data_std
-	test_labels = test_labels.to(selected_device)
+	splits = splits.to(selected_device)
+	data_mean = splits.train_X.mean(dim=(0, 1), keepdim=True)
+	data_std = splits.train_X.std(dim=(0, 1), keepdim=True).clamp_min(1e-6)
+	normalized_train_X = (splits.train_X - data_mean) / data_std
+	normalized_validation_X = (splits.validation_X - data_mean) / data_std
+	normalized_test_X = (splits.test_X - data_mean) / data_std
+	train_sequences = normalized_train_X.size(0)
+	if train_sequences < 1 or splits.validation_X.size(0) < 1 or splits.test_X.size(0) < 1:
+		raise ValueError("dataset_num_batches must provide non-empty train, validation, and test splits")
+	best_validation_loss = float("inf")
+	best_state = deepcopy(model.state_dict())
+	stale_evaluations = 0
 
 	for epoch in range(1, epochs + 1):
 		model.train()
 		epoch_losses = []
-		sequence_order = torch.randperm(sequences_per_epoch, device=selected_device)
-		for start in range(0, sequences_per_epoch, batch_size):
+		sequence_order = torch.randperm(train_sequences, device=selected_device)
+		for start in range(0, train_sequences, batch_size):
 			indices = sequence_order[start : start + batch_size]
-			X = normalized_X[indices]
-			labels = all_labels[indices]
+			X = normalized_train_X[indices]
+			labels = splits.train_labels[indices]
 			optimizer.zero_grad()
 			# In unconditional mode, the flow receives coordinates only.
 			z, _, logdet = model(X, labels if conditional else None)
@@ -222,21 +226,18 @@ def train_two_moons(config: TrainingConfig) -> tuple[Model, list[float]]:
 		if epoch % plot_frequency == 0 or epoch == epochs:
 			model.eval()
 			with torch.no_grad():
-				test_z, _, test_logdet = model(test_X, test_labels if conditional else None)
+				validation_z, _, validation_logdet = model(
+					normalized_validation_X, splits.validation_labels if conditional else None
+				)
+				validation_loss = model.get_loss(validation_z, validation_logdet).item()
+				test_z, _, test_logdet = model(
+					normalized_test_X, splits.test_labels if conditional else None
+				)
 				test_losses.append(model.get_loss(test_z, test_logdet).item())
 				test_epochs.append(epoch)
-				# Evaluate on more sequences than one training batch for smoother plots.
-				plot_X, plot_labels = get_two_moons(
-					points_per_batch=points_per_batch,
-					num_batches=plot_batches,
-					noise=noise,
-					seed=seed,
-				)
-				plot_X = plot_X.to(selected_device)
-				plot_labels = plot_labels.to(selected_device)
-				plot_X = (plot_X - data_mean) / data_std
+				plot_X = normalized_test_X[:plot_batches]
+				plot_labels = splits.test_labels[:plot_batches]
 				generated_labels = plot_labels if conditional else None
-				# Sample in latent space, then use the learned inverse flow.
 				generated = model.reverse(torch.randn_like(plot_X), generated_labels)
 				generated = generated * data_std + data_mean
 				save_plot(
@@ -250,8 +251,18 @@ def train_two_moons(config: TrainingConfig) -> tuple[Model, list[float]]:
 					epoch,
 					plot_path,
 				)
+			if validation_loss < best_validation_loss:
+				best_validation_loss = validation_loss
+				best_state = deepcopy(model.state_dict())
+				stale_evaluations = 0
+			else:
+				stale_evaluations += 1
+				if stale_evaluations >= config.early_stopping_patience:
+					print(f"Early stopping at epoch {epoch:03d}: validation loss stopped improving")
+					break
 			print(f"Epoch {epoch:03d}/{epochs}: loss={losses[-1]:.4f} ({selected_device})")
 
+	model.load_state_dict(best_state)
 	return model, losses
 
 
