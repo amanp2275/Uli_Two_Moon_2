@@ -15,9 +15,19 @@ def save_training_plot(real, labels, generated, generated_labels, train_losses,
     real = real.detach().cpu().reshape(-1, 2)
     labels = labels.detach().cpu().reshape(-1)
     generated = generated.detach().cpu().reshape(-1, 2)
+    real_mask = torch.isfinite(real).all(dim=1)
+    generated_mask = torch.isfinite(generated).all(dim=1)
+    real = real[real_mask]
+    labels = labels[real_mask]
+    generated = generated[generated_mask]
+    if generated_labels is not None:
+        generated_labels = generated_labels.detach().cpu().reshape(-1)[generated_mask]
+    if real.numel() == 0:
+        real = torch.zeros((1, 2))
+        labels = torch.zeros(1)
     # Keep rare generated outliers from making the two point-cloud panels
     # unreadable. This changes only the displayed window, not the data.
-    combined = torch.cat((real, generated), dim=0)
+    combined = torch.cat((real, generated), dim=0) if generated.numel() else real
     lower = torch.quantile(combined, 0.005, dim=0)
     upper = torch.quantile(combined, 0.995, dim=0)
     center = (lower + upper) / 2
@@ -28,7 +38,9 @@ def save_training_plot(real, labels, generated, generated_labels, train_losses,
     figure, axes = plt.subplots(1, 3, figsize=(16, 7))
     axes[0].scatter(real[:, 0], real[:, 1], c=labels, cmap="coolwarm", s=8)
     axes[0].set_title("Real two moons")
-    if generated_labels is None:
+    if generated.numel() == 0:
+        axes[1].text(0.5, 0.5, "No finite generated samples", ha="center", va="center")
+    elif generated_labels is None:
         axes[1].scatter(generated[:, 0], generated[:, 1], color="darkgreen", s=8)
     else:
         axes[1].scatter(generated[:, 0], generated[:, 1], c=generated_labels.detach().cpu().reshape(-1), cmap="coolwarm", s=8)
@@ -64,10 +76,22 @@ def save_samples_plot(real, labels, generated, generated_labels, output_path: Pa
     real = real.detach().cpu().reshape(-1, 2)
     labels = labels.detach().cpu().reshape(-1)
     generated = generated.detach().cpu().reshape(-1, 2)
+    real_mask = torch.isfinite(real).all(dim=1)
+    generated_mask = torch.isfinite(generated).all(dim=1)
+    real = real[real_mask]
+    labels = labels[real_mask]
+    generated = generated[generated_mask]
+    if generated_labels is not None:
+        generated_labels = generated_labels.detach().cpu().reshape(-1)[generated_mask]
+    if real.numel() == 0:
+        real = torch.zeros((1, 2))
+        labels = torch.zeros(1)
     figure, axes = plt.subplots(1, 2, figsize=(11, 5))
     axes[0].scatter(real[:, 0], real[:, 1], c=labels, cmap="coolwarm", s=8)
     axes[0].set_title("Real two moons")
-    if generated_labels is None:
+    if generated.numel() == 0:
+        axes[1].text(0.5, 0.5, "No finite generated samples", ha="center", va="center")
+    elif generated_labels is None:
         axes[1].scatter(generated[:, 0], generated[:, 1], color="darkgreen", s=8)
     else:
         axes[1].scatter(generated[:, 0], generated[:, 1], c=generated_labels.detach().cpu().reshape(-1), cmap="coolwarm", s=8)
