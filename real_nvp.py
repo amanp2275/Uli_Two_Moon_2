@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 from pathlib import Path
 from copy import deepcopy
+from math import log, pi
+from typing import Callable
 
 import torch
 from torch import nn
@@ -30,6 +32,8 @@ class RealNVPConfig:
 	num_layers: int = 8
 	hidden_features: int = 128
 	learning_rate: float = 1e-3
+	checkpoint_callback: Callable[[int, float, float, float], None] | None = None
+	show_loss_plot: bool = True
 
 
 class CouplingNetwork(nn.Module):
@@ -71,7 +75,7 @@ class AffineCoupling(nn.Module):
 		identity = x * self.mask
 		log_scale, translation = self.transform(self._network_input(identity, labels)).chunk(2, dim=-1)
 		log_scale = 2.0 * torch.tanh(log_scale / 2.0) * (1.0 - self.mask)
-		translation = translation * (1.0 - self.mask)
+		translation = translation * (1.0 - self.mask) 
 		return identity + (1.0 - self.mask) * (x * log_scale.exp() + translation), log_scale.sum(dim=-1)
 
 	def inverse(self, z: torch.Tensor, labels: torch.Tensor | None = None) -> tuple[torch.Tensor, torch.Tensor]:
@@ -114,7 +118,9 @@ class RealNVP(nn.Module):
 		return z
 
 	def get_loss(self, z: torch.Tensor, logdet: torch.Tensor) -> torch.Tensor:
-		return 0.5 * z.pow(2).mean() - logdet.mean()
+		"""Return mean negative log-likelihood per coordinate."""
+		base_nll = 0.5 * z.pow(2).sum(dim=-1) + 0.5 * log(2.0 * pi)
+		return (base_nll - logdet).mean() / z.size(-1)
 
 
 def train_two_moons(config: RealNVPConfig) -> tuple[RealNVP, list[float]]:
@@ -203,6 +209,7 @@ def train_two_moons(config: RealNVPConfig) -> tuple[RealNVP, list[float]]:
 					test_epochs,
 					epoch,
 					Path(config.plot_dir),
+					show_loss_plot=config.show_loss_plot,
 				)
 			if validation_loss < best_validation_loss:
 				best_validation_loss = validation_loss
@@ -214,6 +221,8 @@ def train_two_moons(config: RealNVPConfig) -> tuple[RealNVP, list[float]]:
 					print(f"Early stopping at epoch {epoch:03d}: validation loss stopped improving")
 					break
 			print(f"Epoch {epoch:03d}/{config.epochs}: loss={losses[-1]:.4f} ({device})")
+			if config.checkpoint_callback is not None:
+				config.checkpoint_callback(epoch, losses[-1], validation_loss, test_losses[-1])
 
 	model.load_state_dict(best_state)
 	return model, losses

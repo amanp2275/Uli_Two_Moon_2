@@ -27,4 +27,4 @@ python real_nvp/train_conditional.py
 python real_nvp/train_unconditional.py
 ```
 
-Generated plots are intentionally ignored by Git.
+Generated plots are intentionally ignored by Git. 

@@ -61,8 +61,9 @@ def save_plot(
 	test_epochs: list[int],
 	epoch: int,
 	plot_dir: Path,
+	show_loss_plot: bool = True,
 ) -> None:
-	"""Save real/generated point clouds and the loss curve for one checkpoint."""
+	"""Save real/generated point clouds and optionally the loss curve."""
 	plot_dir.mkdir(parents=True, exist_ok=True)
 
 	real_points = X.detach().cpu().reshape(-1, 2)
@@ -95,11 +96,14 @@ def save_plot(
 			alpha=0.8,
 		)
 		axes[1].set_title("Generated samples (conditional)")
-	axes[2].plot(range(1, len(losses) + 1), losses, color="black", label="Train")
-	axes[2].plot(test_epochs, test_losses, color="tab:orange", label="Test")
-	axes[2].set_title("Train/test loss")
-	axes[2].set_xlabel("Epoch")
-	axes[2].legend()
+	if show_loss_plot:
+		axes[2].plot(range(1, len(losses) + 1), losses, color="black", label="Train")
+		axes[2].plot(test_epochs, test_losses, color="tab:orange", label="Test")
+		axes[2].set_title("Train/test loss")
+		axes[2].set_xlabel("Epoch")
+		axes[2].legend()
+	else:
+		axes[2].axis("off")
 	if generated_labels is None:
 		axes[3].axis("off")
 		axes[3].text(0.5, 0.5, "No class labels\n(unconditional model)", ha="center", va="center")
@@ -147,7 +151,6 @@ def train_two_moons(config: TrainingConfig) -> tuple[Model, list[float]]:
 	noise = config.noise
 	seed = config.seed
 	plot_dir = config.plot_dir
-	updates_per_epoch = config.updates_per_epoch
 	plot_batches = config.plot_batches
 	test_batches = config.test_batches
 	device = config.device
@@ -156,8 +159,8 @@ def train_two_moons(config: TrainingConfig) -> tuple[Model, list[float]]:
 		raise ValueError("batch_size, points_per_batch, and epochs must be at least 1")
 	if plot_frequency < 1:
 		raise ValueError("plot_frequency must be at least 1")
-	if updates_per_epoch < 1 or plot_batches < 1 or test_batches < 1:
-		raise ValueError("updates_per_epoch, plot_batches, and test_batches must be at least 1")
+	if plot_batches < 1 or test_batches < 1:
+		raise ValueError("plot_batches and test_batches must be at least 1")
 
 	# Prefer the GPU automatically, while allowing explicit CPU/GPU selection.
 	selected_device = torch.device(device or ("cuda" if torch.cuda.is_available() else "cpu"))
@@ -250,6 +253,7 @@ def train_two_moons(config: TrainingConfig) -> tuple[Model, list[float]]:
 					test_epochs,
 					epoch,
 					plot_path,
+					show_loss_plot=config.show_loss_plot,
 				)
 			if validation_loss < best_validation_loss:
 				best_validation_loss = validation_loss
@@ -261,6 +265,8 @@ def train_two_moons(config: TrainingConfig) -> tuple[Model, list[float]]:
 					print(f"Early stopping at epoch {epoch:03d}: validation loss stopped improving")
 					break
 			print(f"Epoch {epoch:03d}/{epochs}: loss={losses[-1]:.4f} ({selected_device})")
+			if config.checkpoint_callback is not None:
+				config.checkpoint_callback(epoch, losses[-1], validation_loss, test_losses[-1])
 
 	model.load_state_dict(best_state)
 	return model, losses

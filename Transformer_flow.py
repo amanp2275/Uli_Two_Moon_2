@@ -182,7 +182,9 @@ class MetaBlock(torch.nn.Module):
             xa = torch.zeros_like(x)
 
         scale = (-xa.float()).exp().type(xa.dtype)
-        return self.permutation((x_in - xb) * scale, inverse=True), -xa.mean(dim=[1, 2])
+        # Return the total log-determinant for each sequence. The training
+        # loss performs the common per-coordinate normalization.
+        return self.permutation((x_in - xb) * scale, inverse=True), -xa.sum(dim=[1, 2])
 
     def reverse_step(
         self,
@@ -308,7 +310,7 @@ class Model(torch.nn.Module):
     ) -> tuple[torch.Tensor, list[torch.Tensor], torch.Tensor]:
         x = self.patchify(x)
         outputs = []
-        logdets = torch.zeros((), device=x.device)
+        logdets = torch.zeros(x.size(0), device=x.device, dtype=x.dtype)
         for block in self.blocks:
             x, logdet = block(x, y)
             logdets = logdets + logdet
@@ -320,7 +322,12 @@ class Model(torch.nn.Module):
         self.var.lerp_(z2.detach(), weight=self.VAR_LR)
 
     def get_loss(self, z: torch.Tensor, logdets: torch.Tensor):
-        return 0.5 * z.pow(2).mean() - logdets.mean()
+        """Return mean negative log-likelihood per coordinate."""
+        base_nll = 0.5 * z.pow(2).sum(dim=-1) + 0.5 * torch.log(
+            torch.tensor(2.0 * torch.pi, device=z.device, dtype=z.dtype)
+        )
+        sequence_nll = base_nll.sum(dim=-1) - logdets
+        return sequence_nll.mean() / (z.size(1) * z.size(2))
 
     def reverse(
         self,
