@@ -3,6 +3,10 @@
   "best_epoch": 300,
   "best_validation_loss": 0.0533200278878212,
   "test_loss_at_last_evaluation": 0.05035301670432091,
+  "final_train_loss": 0.02243385650217533,
+  "final_validation_loss": 0.0533200278878212,
+  "final_test_loss": 0.05035301670432091,
+  "total_trainable_parameters": 330256,
   "train_losses": [
     0.9775188152606671,
     0.960853113577916,
