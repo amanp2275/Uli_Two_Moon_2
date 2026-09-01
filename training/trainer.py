@@ -90,6 +90,13 @@ def train_model(model: torch.nn.Module, config, model_name: str) -> TrainingResu
         validation_losses.append(validation_loss)
         test_losses.append(test_loss)
         eval_epochs.append(epoch)
+        print(
+            f"[{model_name}] checkpoint epoch {epoch:03d}/{config.epochs}: "
+            f"train_loss={train_losses[-1]:.6f}, "
+            f"validation_loss={validation_loss:.6f}, "
+            f"test_loss={test_loss:.6f}",
+            flush=True,
+        )
         save_training_plot(
             test_x[:config.plot_batches] * std + mean,
             splits.test_labels[:config.plot_batches], generated, generated_labels,
