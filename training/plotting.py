@@ -58,6 +58,45 @@ def save_training_plot(real, labels, generated, generated_labels, train_losses,
     plt.close(figure)
 
 
+def save_samples_plot(real, labels, generated, generated_labels, output_path: Path) -> None:
+    """Save the final real/generated sample comparison without loss curves."""
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    real = real.detach().cpu().reshape(-1, 2)
+    labels = labels.detach().cpu().reshape(-1)
+    generated = generated.detach().cpu().reshape(-1, 2)
+    figure, axes = plt.subplots(1, 2, figsize=(11, 5))
+    axes[0].scatter(real[:, 0], real[:, 1], c=labels, cmap="coolwarm", s=8)
+    axes[0].set_title("Real two moons")
+    if generated_labels is None:
+        axes[1].scatter(generated[:, 0], generated[:, 1], color="darkgreen", s=8)
+    else:
+        axes[1].scatter(generated[:, 0], generated[:, 1], c=generated_labels.detach().cpu().reshape(-1), cmap="coolwarm", s=8)
+    axes[1].set_title("Generated samples")
+    for axis in axes:
+        axis.set_aspect("equal")
+        axis.grid(alpha=0.2)
+    figure.tight_layout()
+    figure.savefig(output_path, dpi=150)
+    plt.close(figure)
+
+
+def save_loss_curves(train_losses, validation_losses, test_losses, epochs, output_path: Path) -> None:
+    """Save this run's train, validation, and test loss histories."""
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    figure, axis = plt.subplots(figsize=(8, 5))
+    axis.plot(range(1, len(train_losses) + 1), train_losses, label="Train")
+    axis.plot(epochs, validation_losses, label="Validation")
+    axis.plot(epochs, test_losses, label="Test")
+    axis.set_xlabel("Epoch")
+    axis.set_ylabel("Loss")
+    axis.set_title("Loss curves")
+    axis.legend()
+    axis.grid(alpha=0.2)
+    figure.tight_layout()
+    figure.savefig(output_path, dpi=150)
+    plt.close(figure)
+
+
 def save_parameter_table(parameters: dict, output_path: Path) -> None:
     """Save one parameter-only reference image for a training run."""
     output_path.parent.mkdir(parents=True, exist_ok=True)

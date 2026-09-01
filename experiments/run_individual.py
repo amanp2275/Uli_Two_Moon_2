@@ -17,10 +17,10 @@ def main() -> None:
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
     if args.model == "real_nvp":
-        config = replace(RealNVPConfig(output_dir=root / "results" / "individual"), conditional=not args.unconditional)
+        config = replace(RealNVPConfig(output_dir=root / "results"), conditional=not args.unconditional)
         model = RealNVP(config.num_layers, config.hidden_features, config.conditional)
     else:
-        config = replace(TransformerConfig(output_dir=root / "results" / "individual"), conditional=not args.unconditional)
+        config = replace(TransformerConfig(output_dir=root / "results"), conditional=not args.unconditional)
         model = TransformerFlow(config.in_channels, config.points_per_batch, config.channels, config.num_blocks, config.layers_per_block, config.head_dim, config.expansion, config.nvp, 2 if config.conditional else 0)
     train_model(model, config, args.model)
 

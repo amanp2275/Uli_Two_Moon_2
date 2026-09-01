@@ -7,7 +7,15 @@ import numpy as np
 import torch
 
 from dataset import load_or_generate_two_moons
-from .plotting import save_metrics, save_parameter_table, save_summary_table, save_training_plot
+from .plotting import (
+    save_loss_curves,
+    save_metrics,
+    save_parameter_table,
+    save_samples_plot,
+    save_summary_table,
+    save_training_plot,
+)
+from .storage import config_dict, prepare_run_directory, raw_run_path, save_config
 
 
 class TrainingResult(dict):
@@ -39,8 +47,8 @@ def train_model(model: torch.nn.Module, config, model_name: str) -> TrainingResu
     validation_x = (splits.validation_X - mean) / std
     test_x = (splits.test_X - mean) / std
     optimizer = torch.optim.Adam(model.parameters(), lr=config.learning_rate, weight_decay=config.weight_decay)
-    output_dir = Path(config.output_dir) / model_name
-    output_dir.mkdir(parents=True, exist_ok=True)
+    output_dir = prepare_run_directory(raw_run_path(config.output_dir, model_name, config))
+    save_config(config, output_dir / "config.json")
     plot_parameters = {"model": model_name}
     if is_dataclass(config):
         plot_parameters.update(asdict(config))
@@ -122,6 +130,23 @@ def train_model(model: torch.nn.Module, config, model_name: str) -> TrainingResu
         final_train_loss = model.get_loss(final_train_z, final_train_logdet).item()
         final_validation_loss = model.get_loss(final_validation_z, final_validation_logdet).item()
         final_test_loss = model.get_loss(final_test_z, final_test_logdet).item()
+        final_generated_labels = splits.test_labels[:config.plot_batches] if config.conditional else None
+        final_generated = model.reverse(torch.randn_like(test_x[:config.plot_batches]), final_generated_labels)
+        final_generated = final_generated * std + mean
+    save_samples_plot(
+        splits.test_X[:config.plot_batches],
+        splits.test_labels[:config.plot_batches],
+        final_generated,
+        final_generated_labels,
+        output_dir / "samples_final.png",
+    )
+    save_loss_curves(
+        train_losses,
+        validation_losses,
+        test_losses,
+        eval_epochs,
+        output_dir / "loss_curves.png",
+    )
     final_summary = {
         "model": model_name,
         "train_loss": f"{final_train_loss:.6f}",
@@ -148,9 +173,9 @@ def train_model(model: torch.nn.Module, config, model_name: str) -> TrainingResu
         "validation_losses": validation_losses,
         "test_losses": test_losses,
         "evaluation_epochs": eval_epochs,
-        "config": asdict(config) if is_dataclass(config) else {},
+        "config": config_dict(config),
     }
-    metrics["config"] = {key: str(value) if isinstance(value, Path) else value for key, value in metrics["config"].items()}
+    # Keep this schema stable: final_test_loss is the canonical Test NLL.
     save_metrics(metrics, output_dir / "metrics.json")
     torch.save({"model_state_dict": model.state_dict(), "mean": mean.cpu(), "std": std.cpu()}, output_dir / "best_model.pt")
     return TrainingResult(metrics)
