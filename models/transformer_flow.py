@@ -266,6 +266,8 @@ class Model(torch.nn.Module):
         channels: int = 128,
         num_blocks: int = 4,
         layers_per_block: int = 1,
+        head_dim: int = 64,
+        expansion: int = 4,
         nvp: bool = True,
         num_classes: int = 0,
     ):
@@ -285,6 +287,8 @@ class Model(torch.nn.Module):
                     self.num_patches,
                     permutations[i % 2],
                     layers_per_block,
+                    head_dim=head_dim,
+                    expansion=expansion,
                     nvp=nvp,
                     num_classes=num_classes,
                 )
@@ -315,7 +319,7 @@ class Model(torch.nn.Module):
             x, logdet = block(x, y)
             logdets = logdets + logdet
             outputs.append(x)
-        return x, outputs, logdets
+        return x, logdets
 
     def update_prior(self, z: torch.Tensor):
         z2 = (z**2).mean(dim=0)
@@ -350,3 +354,7 @@ class Model(torch.nn.Module):
             return x
         else:
             return seq
+
+
+# Public name used by the shared trainer and experiment launchers.
+TransformerFlow = Model
