@@ -1,0 +1,13 @@
+experiment_id,experiment_type,model,learning_rate,batch_size,epochs,seed,conditional,weight_decay,early_stopping_patience,evaluation_frequency,points_per_batch,dataset_num_batches,noise,plot_batches,device,dataset_path,num_layers,hidden_features,in_channels,channels,num_blocks,layers_per_block,head_dim,expansion,nvp,notes,run
+EXP_001,parameter_sweep,real_nvp,0.001,128,100,42,YES,0.0001,3,20,,,,,,,4,64,,,,,,,,baseline,NO
+EXP_002,parameter_sweep,real_nvp,0.0005,128,100,42,YES,0.0001,3,20,,,,,,,4,64,,,,,,,,lower learning rate,NO
+EXP_003,parameter_sweep,real_nvp,0.0005,500,300,7,YES,0.0001,6,20,,,,,,,5,64,,,,,,,,,NO
+EXP_004,parameter_sweep,transformer,0.0005,500,300,7,YES,0.0001,6,20,,,,,cuda,,,,,,,,,,,,NO
+EXP_005,parameter_sweep,transformer,0.0005,600,600,7,YES,0.0001,6,20,,,,,cuda,,,,,,,,,,,TEST RUN,YES
+EXP_006,,,,,,,,,,,,,,,,,,,,,,,,,,,
+EXP_007,,,,,,,,,,,,,,,,,,,,,,,,,,,
+EXP_008,,,,,,,,,,,,,,,,,,,,,,,,,,,
+EXP_009,,,,,,,,,,,,,,,,,,,,,,,,,,,
+EXP_010,,,,,,,,,,,,,,,,,,,,,,,,,,,
+EXP_011,,,,,,,,,,,,,,,,,,,,,,,,,,,
+EXP_012,,,,,,,,,,,,,,,,,,,,,,,,,,,

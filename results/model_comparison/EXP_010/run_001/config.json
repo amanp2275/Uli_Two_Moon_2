@@ -1,0 +1,40 @@
+{
+  "queue_row": {
+    "experiment_id": "EXP_010",
+    "experiment_type": "model_comparison",
+    "comparison_group": "SAME_PROTOCOL",
+    "model": "transformer",
+    "learning_rate": "0.001",
+    "batch_size": "128",
+    "layers": "4",
+    "hidden_dim": "64",
+    "epochs": "100",
+    "seed": "42",
+    "notes": "Same protocol baseline",
+    "run": "YES"
+  },
+  "resolved_config": {
+    "dataset_path": "C:\\Users\\amanp\\OneDrive\\Desktop\\Uli_Projects_Attempts\\Uli_Two_Moon_2\\two_moons_splits.pt",
+    "output_dir": "C:\\Users\\amanp\\OneDrive\\Desktop\\Uli_Projects_Attempts\\Uli_Two_Moon_2\\results\\model_comparison\\EXP_010\\run_001",
+    "seed": 42,
+    "conditional": true,
+    "batch_size": 128,
+    "epochs": 100,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "early_stopping_patience": 3,
+    "evaluation_frequency": 50,
+    "points_per_batch": 500,
+    "dataset_num_batches": 512,
+    "noise": 0.05,
+    "plot_batches": 32,
+    "device": null,
+    "in_channels": 2,
+    "channels": 64,
+    "num_blocks": 4,
+    "layers_per_block": 1,
+    "head_dim": 64,
+    "expansion": 4,
+    "nvp": true
+  }
+}
