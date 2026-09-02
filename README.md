@@ -36,31 +36,19 @@ Generated plots are intentionally ignored by Git.
 
 ## Manual experiment runner
 
-Add experiments to `experiments/experiment_config.json`. Each entry is run once
-with the parameters written in that file:
+Edit only `experiments/experiment_queue.csv`. Each row is one experiment and
+rows with `run=YES` are executed by:
 
-```json
-{
-  "experiments": [
-    {
-      "experiment_id": "EXP_001",
-      "experiment_type": "parameter_sweep",
-      "model": "real_nvp",
-      "parameters": {
-        "learning_rate": 0.001,
-        "batch_size": 128,
-        "epochs": 100,
-        "num_layers": 6,
-        "hidden_features": 64
-      },
-      "seed": 42
-    }
-  ]
-}
+```powershell
+python experiments/run_experiment.py
 ```
 
-Run one entry with `python experiments/run_experiment.py --id EXP_001`, or
-run all entries explicitly listed in the file with `--all`. Completed IDs are
-skipped to prevent accidental reruns. Per-experiment artifacts are stored in
-`results/<experiment_id>/`, and the persistent summary table is
-`results/experiments.csv`.
+To run one row explicitly, use `python experiments/run_experiment.py --id
+EXP_001`. Completed IDs are skipped. Use `--force` only for an intentional
+rerun; the previous output row and artifacts are preserved under a separate
+run ID.
+
+The output table is `results/experiment_results.csv`. It contains the queue
+parameters, existing training/evaluation metrics, timing, Git commit, and
+paths to the saved configuration, plots, and checkpoint. Experiment artifacts
+are organized as `results/<experiment_type>/<experiment_id>/run_<number>/`.

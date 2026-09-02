@@ -1,6 +1,7 @@
-"""Run one explicitly configured experiment and register its result."""
+"""Run manually selected experiments from experiments/experiment_queue.csv."""
 
 import argparse
+import csv
 import hashlib
 import json
 import subprocess
@@ -16,13 +17,27 @@ from configs import RealNVPConfig, TransformerConfig
 from models import RealNVP, TransformerFlow
 from training import train_model
 from training.storage import config_dict
-from experiments.experiment_registry import append_result, completed_ids
-
+from experiments.experiment_registry import append_result, completed_ids, next_run_number
 
 ROOT = Path(__file__).resolve().parents[1]
-CONFIG_PATH = Path(__file__).with_name("experiment_config.json")
+QUEUE_PATH = Path(__file__).with_name("experiment_queue.csv")
 RESULTS_ROOT = ROOT / "results"
-REGISTRY_PATH = RESULTS_ROOT / "experiments.csv"
+RESULTS_PATH = RESULTS_ROOT / "experiment_results.csv"
+
+QUEUE_FIELDS = [
+    "experiment_id", "experiment_type", "model", "learning_rate", "batch_size", "epochs", "seed",
+    "conditional", "weight_decay", "early_stopping_patience", "evaluation_frequency", "points_per_batch",
+    "dataset_num_batches", "noise", "plot_batches", "device", "dataset_path", "num_layers",
+    "hidden_features", "in_channels", "channels", "num_blocks", "layers_per_block", "head_dim",
+    "expansion", "nvp", "notes", "run",
+]
+INT_FIELDS = {
+    "batch_size", "epochs", "seed", "early_stopping_patience", "evaluation_frequency", "points_per_batch",
+    "dataset_num_batches", "plot_batches", "num_layers", "hidden_features", "in_channels", "channels",
+    "num_blocks", "layers_per_block", "head_dim", "expansion",
+}
+FLOAT_FIELDS = {"learning_rate", "weight_decay", "noise"}
+BOOL_FIELDS = {"conditional", "nvp"}
 
 
 def _now() -> str:
@@ -31,9 +46,7 @@ def _now() -> str:
 
 def _git_commit() -> str:
     try:
-        return subprocess.run(
-            ["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True, text=True, check=True
-        ).stdout.strip()
+        return subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True, text=True, check=True).stdout.strip()
     except (OSError, subprocess.CalledProcessError):
         return ""
 
@@ -48,35 +61,51 @@ def _sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
-def _load_experiments() -> list[dict]:
-    with CONFIG_PATH.open(encoding="utf-8") as handle:
-        payload = json.load(handle)
-    experiments = payload.get("experiments")
-    if not isinstance(experiments, list):
-        raise ValueError("experiment_config.json must contain an 'experiments' list")
-    return experiments
+def _read_queue() -> list[dict[str, str]]:
+    with QUEUE_PATH.open(newline="", encoding="utf-8-sig") as handle:
+        reader = csv.DictReader(handle)
+        if not reader.fieldnames:
+            raise ValueError("experiment_queue.csv must have a header row")
+        missing = {"experiment_id", "experiment_type", "model", "run"} - set(reader.fieldnames)
+        if missing:
+            raise ValueError(f"experiment_queue.csv is missing required columns: {', '.join(sorted(missing))}")
+        return [dict(row) for row in reader]
 
 
-def _config_fields(config_type) -> set[str]:
-    return {field.name for field in fields(config_type)}
+def _parse_value(name: str, value: str):
+    value = value.strip()
+    if not value:
+        return None
+    if name in BOOL_FIELDS:
+        if value.lower() in {"yes", "true", "1"}:
+            return True
+        if value.lower() in {"no", "false", "0"}:
+            return False
+        raise ValueError(f"{name} must be YES/NO or true/false, got {value!r}")
+    if name in INT_FIELDS:
+        return int(value)
+    if name in FLOAT_FIELDS:
+        return float(value)
+    return value
 
 
-def _build_config(spec: dict, experiment_dir: Path):
-    model = spec["model"].lower()
+def _build_config(row: dict[str, str], experiment_dir: Path):
+    model = row.get("model", "").strip().lower()
     config_type = RealNVPConfig if model == "real_nvp" else TransformerConfig if model == "transformer" else None
     if config_type is None:
         raise ValueError(f"unsupported model: {model!r}")
-    values = dict(spec.get("parameters", {}))
-    if "seed" in spec:
-        values["seed"] = spec["seed"]
-    unknown = sorted(set(values) - _config_fields(config_type) - {"output_dir"})
-    if unknown:
-        raise ValueError(f"unknown {model} parameter(s): {', '.join(unknown)}")
+    allowed = {field.name for field in fields(config_type)}
+    values = {}
+    for name, raw in row.items():
+        if name in allowed and raw is not None:
+            parsed = _parse_value(name, raw)
+            if parsed is not None:
+                values[name] = parsed
     values["output_dir"] = experiment_dir
     return config_type(**values), model
 
 
-def _model(config, model_name):
+def _make_model(config, model_name):
     if model_name == "real_nvp":
         return RealNVP(config.num_layers, config.hidden_features, config.conditional)
     return TransformerFlow(
@@ -86,78 +115,93 @@ def _model(config, model_name):
     )
 
 
-def _run(spec: dict) -> None:
-    experiment_id = str(spec.get("experiment_id", "")).strip()
-    experiment_type = spec.get("experiment_type")
-    if not experiment_id or experiment_type not in {"parameter_sweep", "model_comparison"}:
-        raise ValueError("each experiment needs experiment_id and experiment_type (parameter_sweep/model_comparison)")
-    experiment_dir = RESULTS_ROOT / experiment_id
-    experiment_dir.mkdir(parents=True, exist_ok=True)
-    config, model_name = _build_config(spec, experiment_dir)
-    config_path = experiment_dir / "config.json"
-    config_path.write_text(json.dumps({"experiment": spec, "resolved_config": config_dict(config)}, indent=2), encoding="utf-8")
-    dataset_path = Path(config.dataset_path)
+def _base_row(row: dict[str, str], run_id: str) -> dict:
+    return {
+        **{field: row.get(field, "") for field in QUEUE_FIELDS},
+        "experiment_id": row.get("experiment_id", "").strip(),
+        "experiment_type": row.get("experiment_type", "").strip(),
+        "model": row.get("model", "").strip().lower(),
+        "run_id": run_id, "status": "failed", "started_at": "", "finished_at": "",
+        "training_time_seconds": "", "epochs_completed": "", "best_epoch": "", "best_training_loss": "",
+        "best_validation_loss": "", "final_train_loss": "", "final_validation_loss": "",
+        "final_test_loss": "", "nll": "", "trainable_parameters": "", "dataset_sha256": "",
+        "git_commit": _git_commit(), "config_path": "", "metrics_path": "", "checkpoint_path": "",
+        "plots_path": "", "parameters_json": "", "error": "",
+    }
+
+
+def _run(row: dict[str, str], run_number: int) -> bool:
+    experiment_id = row.get("experiment_id", "").strip()
+    run_id = f"run_{run_number:03d}"
+    experiment_type = row.get("experiment_type", "").strip()
+    experiment_dir = RESULTS_ROOT / experiment_type / experiment_id / run_id
+    result_row = _base_row(row, run_id)
     started = _now()
     start_time = time.perf_counter()
     try:
-        result = train_model(_model(config, model_name), config, model_name)
+        if not experiment_id:
+            raise ValueError("experiment_id cannot be empty")
+        if row.get("experiment_type", "").strip() not in {"parameter_sweep", "model_comparison"}:
+            raise ValueError("experiment_type must be parameter_sweep or model_comparison")
+        experiment_dir.mkdir(parents=True, exist_ok=True)
+        config, model_name = _build_config(row, experiment_dir)
+        config_path = experiment_dir / "config.json"
+        config_path.write_text(json.dumps({"queue_row": row, "resolved_config": config_dict(config)}, indent=2), encoding="utf-8")
+        dataset_path = Path(config.dataset_path)
+        result = train_model(_make_model(config, model_name), config, model_name)
         elapsed = time.perf_counter() - start_time
-        metrics_path = experiment_dir / "raw" / model_name
-        candidates = list(metrics_path.rglob("metrics.json"))
-        run_dir = candidates[0].parent if candidates else metrics_path
+        candidates = list((experiment_dir / "raw" / model_name).rglob("metrics.json"))
+        run_dir = candidates[0].parent if candidates else experiment_dir / "raw" / model_name
         metrics = dict(result)
         best_epoch = int(metrics.get("best_epoch", 0))
         train_losses = metrics.get("train_losses", [])
-        best_training_loss = train_losses[best_epoch - 1] if 0 < best_epoch <= len(train_losses) else ""
-        resolved = config_dict(config)
-        model_keys = {"num_layers", "hidden_features", "in_channels", "channels", "num_blocks", "layers_per_block", "head_dim", "expansion", "nvp"}
-        model_parameters = {key: resolved[key] for key in resolved if key in model_keys}
-        training_parameters = {key: resolved[key] for key in resolved if key not in model_keys}
-        row = {
-            "experiment_id": experiment_id, "experiment_type": experiment_type, "model": model_name,
-            "seed": config.seed, "status": "completed", "started_at": started, "finished_at": _now(),
-            "training_time_seconds": f"{elapsed:.6f}", "epochs_requested": config.epochs,
-            "epochs_completed": len(train_losses), "best_epoch": best_epoch, "best_training_loss": best_training_loss,
-            "best_validation_loss": metrics.get("best_validation_loss", ""), "final_train_loss": metrics.get("final_train_loss", ""),
-            "final_validation_loss": metrics.get("final_validation_loss", ""), "final_test_loss": metrics.get("final_test_loss", ""),
-            "nll": metrics.get("final_test_loss", ""), "trainable_parameters": metrics.get("total_trainable_parameters", ""),
-            "dataset_path": str(dataset_path), "dataset_sha256": _sha256(dataset_path), "git_commit": _git_commit(),
+        result_row.update({
+            "status": "completed", "started_at": started, "finished_at": _now(),
+            "training_time_seconds": f"{elapsed:.6f}", "epochs_completed": len(train_losses),
+            "best_epoch": best_epoch,
+            "best_training_loss": train_losses[best_epoch - 1] if 0 < best_epoch <= len(train_losses) else "",
+            "best_validation_loss": metrics.get("best_validation_loss", ""),
+            "final_train_loss": metrics.get("final_train_loss", ""),
+            "final_validation_loss": metrics.get("final_validation_loss", ""),
+            "final_test_loss": metrics.get("final_test_loss", ""), "nll": metrics.get("final_test_loss", ""),
+            "trainable_parameters": metrics.get("total_trainable_parameters", ""),
+            "dataset_sha256": _sha256(dataset_path), "git_commit": _git_commit(),
             "config_path": str(config_path), "metrics_path": str(run_dir / "metrics.json"),
             "checkpoint_path": str(run_dir / "best_model.pt"), "plots_path": str(run_dir),
-            "model_parameters_json": json.dumps(model_parameters, sort_keys=True),
-            "training_parameters_json": json.dumps(training_parameters, sort_keys=True),
-        }
-        append_result(REGISTRY_PATH, row)
-        print(f"Completed {experiment_id}; results saved to {run_dir}")
-    except Exception as exc:
-        elapsed = time.perf_counter() - start_time
-        append_result(REGISTRY_PATH, {
-            "experiment_id": experiment_id, "experiment_type": experiment_type, "model": model_name,
-            "seed": config.seed, "status": "failed", "started_at": started, "finished_at": _now(),
-            "training_time_seconds": f"{elapsed:.6f}", "epochs_requested": config.epochs,
-            "dataset_path": str(dataset_path), "dataset_sha256": _sha256(dataset_path), "git_commit": _git_commit(),
-            "config_path": str(config_path), "error": f"{type(exc).__name__}: {exc}",
+            "parameters_json": json.dumps(config_dict(config), sort_keys=True),
         })
-        raise
+        append_result(RESULTS_PATH, result_row)
+        print(f"{experiment_id} completed — results saved to {run_dir}")
+        return True
+    except Exception as exc:
+        result_row.update({
+            "started_at": started, "finished_at": _now(),
+            "training_time_seconds": f"{time.perf_counter() - start_time:.6f}",
+            "error": f"{type(exc).__name__}: {exc}",
+        })
+        append_result(RESULTS_PATH, result_row)
+        print(f"{experiment_id or '<blank id>'} failed — {exc}", file=sys.stderr)
+        return False
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    group = parser.add_mutually_exclusive_group(required=True)
-    group.add_argument("--id", dest="experiment_id")
-    group.add_argument("--all", action="store_true")
+    parser.add_argument("--id", dest="experiment_id", help="run one queue row by experiment ID")
+    parser.add_argument("--force", action="store_true", help="rerun completed IDs and preserve the previous record")
     args = parser.parse_args()
-    specs = _load_experiments()
-    selected = specs if args.all else [spec for spec in specs if spec.get("experiment_id") == args.experiment_id]
-    if not selected:
-        raise SystemExit(f"experiment not found: {args.experiment_id}")
-    done = completed_ids(REGISTRY_PATH)
-    for spec in selected:
-        experiment_id = spec.get("experiment_id")
-        if experiment_id in done:
-            print(f"{experiment_id} has already been completed. Skipping it.")
+    rows = _read_queue()
+    selected = [row for row in rows if args.experiment_id is None or row.get("experiment_id", "").strip() == args.experiment_id]
+    if args.experiment_id is not None and not selected:
+        raise SystemExit(f"experiment not found in queue: {args.experiment_id}")
+    completed = completed_ids(RESULTS_PATH)
+    for row in selected:
+        experiment_id = row.get("experiment_id", "").strip()
+        if args.experiment_id is None and row.get("run", "").strip().upper() != "YES":
             continue
-        _run(spec)
+        if experiment_id in completed and not args.force:
+            print(f"{experiment_id} already completed — skipping.")
+            continue
+        _run(row, next_run_number(RESULTS_PATH, experiment_id))
 
 
 if __name__ == "__main__":
