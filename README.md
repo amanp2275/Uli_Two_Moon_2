@@ -33,3 +33,34 @@ python experiments/compare_tuned_params.py
 Add `--unconditional` to the individual runner for an unconditional run.
 
 Generated plots are intentionally ignored by Git. 
+
+## Manual experiment runner
+
+Add experiments to `experiments/experiment_config.json`. Each entry is run once
+with the parameters written in that file:
+
+```json
+{
+  "experiments": [
+    {
+      "experiment_id": "EXP_001",
+      "experiment_type": "parameter_sweep",
+      "model": "real_nvp",
+      "parameters": {
+        "learning_rate": 0.001,
+        "batch_size": 128,
+        "epochs": 100,
+        "num_layers": 6,
+        "hidden_features": 64
+      },
+      "seed": 42
+    }
+  ]
+}
+```
+
+Run one entry with `python experiments/run_experiment.py --id EXP_001`, or
+run all entries explicitly listed in the file with `--all`. Completed IDs are
+skipped to prevent accidental reruns. Per-experiment artifacts are stored in
+`results/<experiment_id>/`, and the persistent summary table is
+`results/experiments.csv`.
