@@ -1,0 +1,10 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "type": "command",
+        "windows": "powershell -ExecutionPolicy Bypass -File .github\\hooks\\telegram.ps1"
+      }
+    ]
+  }
+}

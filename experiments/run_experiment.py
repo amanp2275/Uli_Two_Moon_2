@@ -4,12 +4,14 @@ import argparse
 import csv
 import hashlib
 import json
+import os
 import subprocess
 import sys
 import time
 from dataclasses import fields
 from datetime import datetime, timezone
 from pathlib import Path
+from urllib.request import Request, urlopen
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
@@ -42,6 +44,25 @@ BOOL_FIELDS = {"conditional", "nvp"}
 
 def _now() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
+
+
+def _notify_telegram(message: str) -> None:
+    token = os.getenv("TELEGRAM_BOT_TOKEN")
+    chat_id = os.getenv("TELEGRAM_CHAT_ID")
+    if not token or not chat_id:
+        return
+    payload = json.dumps({"chat_id": chat_id, "text": message}).encode("utf-8")
+    request = Request(
+        f"https://api.telegram.org/bot{token}/sendMessage",
+        data=payload,
+        headers={"Content-Type": "application/json"},
+        method="POST",
+    )
+    try:
+        with urlopen(request, timeout=10):
+            pass
+    except Exception as error:
+        print(f"Telegram notification failed: {error}", file=sys.stderr)
 
 
 def _git_commit() -> str:
@@ -194,14 +215,30 @@ def main() -> None:
     if args.experiment_id is not None and not selected:
         raise SystemExit(f"experiment not found in queue: {args.experiment_id}")
     completed = completed_ids(RESULTS_PATH)
+    attempted = successful = failed = skipped = 0
     for row in selected:
         experiment_id = row.get("experiment_id", "").strip()
         if args.experiment_id is None and row.get("run", "").strip().upper() != "YES":
+            skipped += 1
             continue
         if experiment_id in completed and not args.force:
             print(f"{experiment_id} already completed — skipping.")
+            skipped += 1
             continue
-        _run(row, next_run_number(RESULTS_PATH, experiment_id))
+        attempted += 1
+        if _run(row, next_run_number(RESULTS_PATH, experiment_id)):
+            successful += 1
+        else:
+            failed += 1
+
+    status = "completed successfully" if failed == 0 else "finished with failures"
+    _notify_telegram(
+        f"Experiment queue {status}.\n"
+        f"Trainings attempted: {attempted}\n"
+        f"Successful: {successful}\n"
+        f"Failed: {failed}\n"
+        f"Skipped: {skipped}"
+    )
 
 
 if __name__ == "__main__":

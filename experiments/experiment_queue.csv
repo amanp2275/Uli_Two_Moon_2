@@ -1,11 +1,9 @@
-experiment_id,experiment_type,comparison_group,model,learning_rate,batch_size,layers,hidden_dim,epochs,seed,notes,run
-EXP_001,parameter_sweep,LR_STUDY,real_nvp,0.001,128,4,64,100,42,Baseline,YES
-EXP_002,parameter_sweep,LR_STUDY,real_nvp,0.0005,128,4,64,100,42,Lower learning rate,YES
-EXP_003,parameter_sweep,LR_STUDY,transformer,0.001,128,4,64,100,42,Transformer baseline for LR study,YES
-EXP_004,parameter_sweep,LR_STUDY,transformer,0.0005,128,4,64,100,42,Lower learning rate,YES
-EXP_005,parameter_sweep,DEPTH_STUDY,real_nvp,0.001,128,6,64,100,42,Increased depth,YES
-EXP_006,parameter_sweep,DEPTH_STUDY,transformer,0.001,128,6,64,100,42,Increased depth,YES
-EXP_007,parameter_sweep,CAPACITY_STUDY,real_nvp,0.001,128,4,128,100,42,Increased hidden dimension,YES
-EXP_008,parameter_sweep,CAPACITY_STUDY,transformer,0.001,128,4,128,100,42,Increased hidden dimension,YES
-EXP_009,model_comparison,SAME_PROTOCOL,real_nvp,0.001,128,4,64,100,42,Same protocol baseline,YES
-EXP_010,model_comparison,SAME_PROTOCOL,transformer,0.001,128,4,64,100,42,Same protocol baseline,YES
+experiment_id,experiment_type,model,learning_rate,batch_size,epochs,seed,conditional,weight_decay,early_stopping_patience,evaluation_frequency,points_per_batch,dataset_num_batches,noise,plot_batches,device,dataset_path,num_layers,hidden_features,in_channels,channels,num_blocks,layers_per_block,head_dim,expansion,nvp,notes,run
+EXP_001,parameter_sweep,real_nvp,0.001,500,600,7,YES,0.0001,6,20,,,,,cuda,,5,64,,,,,,,,learning rate = 1e-3,YES
+EXP_002,parameter_sweep,real_nvp,0.0005,500,600,7,YES,0.0001,6,20,,,,,cuda,,5,64,,,,,,,,learning rate = 5e-4,YES
+EXP_003,parameter_sweep,real_nvp,0.0001,500,600,7,YES,0.0001,6,20,,,,,cuda,,5,64,,,,,,,,learning rate = 1e-4,YES
+EXP_004,parameter_sweep,real_nvp,0.00005,500,600,7,YES,0.0001,6,20,,,,,cuda,,5,64,,,,,,,,learning rate = 5e-5,YES
+EXP_005,parameter_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,,,,,cuda,,,,,,,,,,,learning rate = 1e-3,YES
+EXP_006,parameter_sweep,transformer,0.0005,500,600,7,YES,0.0001,6,20,,,,,cuda,,,,,,,,,,,learning rate = 5e-4,YES
+EXP_007,parameter_sweep,transformer,0.0001,500,600,7,YES,0.0001,6,20,,,,,cuda,,,,,,,,,,,learning rate = 1e-4,YES
+EXP_008,parameter_sweep,transformer,0.00005,500,600,7,YES,0.0001,6,20,,,,,cuda,,,,,,,,,,,learning rate = 5e-5,YES

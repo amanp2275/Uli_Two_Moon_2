@@ -52,3 +52,14 @@ The output table is `results/experiment_results.csv`. It contains the queue
 parameters, existing training/evaluation metrics, timing, Git commit, and
 paths to the saved configuration, plots, and checkpoint. Experiment artifacts
 are organized as `results/<experiment_type>/<experiment_id>/run_<number>/`.
+
+## Temporary Telegram notification setup
+
+> Cleanup prompt: Once this project is finished, remove all temporary Telegram
+> notification code and configuration without changing the original experiment
+> behavior. Remove `.github/hooks/telegram.json`, `.github/hooks/telegram.ps1`,
+> `.vscode/tasks.json`, and `scripts/run_with_telegram.ps1`. Remove the Telegram
+> notification imports, helper functions, and notification calls from
+> `experiments/run_individual.py` and `experiments/run_experiment.py`. Also
+> remove the Windows user environment variables `TELEGRAM_BOT_TOKEN` and
+> `TELEGRAM_CHAT_ID`. Remove this temporary README section after cleanup.
