@@ -1,29 +1,34 @@
 experiment_id,experiment_type,model,learning_rate,batch_size,epochs,seed,conditional,weight_decay,early_stopping_patience,evaluation_frequency,points_per_batch,dataset_num_batches,noise,plot_batches,device,dataset_path,num_layers,hidden_features,in_channels,channels,num_blocks,layers_per_block,head_dim,expansion,nvp,notes,run
-EXP_001,learning_rate_sweep,real_nvp,0.001,500,600,7,YES,0,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,5,64,,,,,,,,LR sweep; reference run,NO
-EXP_002,learning_rate_sweep,real_nvp,0.0005,500,600,7,YES,0,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,5,64,,,,,,,,LR sweep,NO
-EXP_003,learning_rate_sweep,real_nvp,0.0001,500,600,7,YES,0,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,5,64,,,,,,,,LR sweep,NO
-EXP_004,learning_rate_sweep,real_nvp,5e-05,500,600,7,YES,0,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,5,64,,,,,,,,LR sweep,NO
-EXP_005,learning_rate_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,4,1,64,4,YES,LR sweep; reference run,NO
-EXP_006,learning_rate_sweep,transformer,0.0005,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,4,1,64,4,YES,LR sweep,NO
-EXP_007,learning_rate_sweep,transformer,0.0001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,4,1,64,4,YES,LR sweep,NO
-EXP_008,learning_rate_sweep,transformer,5e-05,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,4,1,64,4,YES,LR sweep,NO
-EXP_009,weight_decay_sweep,real_nvp,0.001,500,600,7,YES,0,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,5,64,,,,,,,,WD sweep; reference run,NO
-EXP_010,weight_decay_sweep,real_nvp,0.001,500,600,7,YES,1e-05,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,5,64,,,,,,,,WD sweep,NO
-EXP_011,weight_decay_sweep,real_nvp,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,5,64,,,,,,,,WD sweep,NO
-EXP_012,weight_decay_sweep,real_nvp,0.001,500,600,7,YES,0.001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,5,64,,,,,,,,WD sweep,NO
-EXP_013,weight_decay_sweep,transformer,0.001,500,600,7,YES,0,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,4,1,64,4,YES,WD sweep,NO
-EXP_014,weight_decay_sweep,transformer,0.001,500,600,7,YES,1e-05,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,4,1,64,4,YES,WD sweep,NO
-EXP_015,weight_decay_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,4,1,64,4,YES,WD sweep; reference run,NO
-EXP_016,weight_decay_sweep,transformer,0.001,500,600,7,YES,0.001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,4,1,64,4,YES,WD sweep,NO
-EXP_017,depth_sweep,real_nvp,0.001,500,600,7,YES,0,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,3,64,,,,,,,,RealNVP depth,NO
-EXP_018,depth_sweep,real_nvp,0.001,500,600,7,YES,0,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,5,64,,,,,,,,Already measured by EXP_009; reference,NO
-EXP_019,depth_sweep,real_nvp,0.001,500,600,7,YES,0,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,7,64,,,,,,,,RealNVP depth,NO
-EXP_020,depth_sweep,real_nvp,0.001,500,600,7,YES,0,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,9,64,,,,,,,,RealNVP depth,NO
-EXP_021,hidden_features_sweep,real_nvp,0.001,500,600,7,YES,0,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,9,32,,,,,,,,RealNVP width,NO
-EXP_022,hidden_features_sweep,real_nvp,0.001,500,600,7,YES,0,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,9,64,,,,,,,,RealNVP width; reference configuration,NO
-EXP_023,hidden_features_sweep,real_nvp,0.001,500,600,7,YES,0,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,9,128,,,,,,,,RealNVP width,NO
-EXP_024,hidden_features_sweep,real_nvp,0.001,500,600,7,YES,0,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,9,256,,,,,,,,RealNVP width,NO
-EXP_025,parameter_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,2,1,64,4,YES,Transformer num_blocks sweep; 4-block configuration already tested as reference,YES
-EXP_026,parameter_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,6,1,64,4,YES,Transformer num_blocks sweep; 4-block configuration already tested as reference,YES
-EXP_027,parameter_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,8,1,64,4,YES,Transformer num_blocks sweep; 4-block configuration already tested as reference,YES
-EXP_028,parameter_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,10,1,64,4,YES,Transformer num_blocks sweep; 4-block configuration already tested as reference,YES
+EXP_001,parameter_sweep,real_nvp,0.001,500,600,7,YES,0,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,5,64,,,,,,,learning rate sweep,NO,
+EXP_002,parameter_sweep,real_nvp,0.0005,500,600,7,YES,0,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,5,64,,,,,,,learning rate sweep,NO,
+EXP_003,parameter_sweep,real_nvp,0.0001,500,600,7,YES,0,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,5,64,,,,,,,learning rate sweep,NO,
+EXP_004,parameter_sweep,real_nvp,5e-05,500,600,7,YES,0,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,5,64,,,,,,,learning rate sweep,NO,
+EXP_005,parameter_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,, ,2,64,4,1,64,4,YES,learning rate sweep,NO
+EXP_006,parameter_sweep,transformer,0.0005,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,, ,2,64,4,1,64,4,YES,learning rate sweep,NO
+EXP_007,parameter_sweep,transformer,0.0001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,, ,2,64,4,1,64,4,YES,learning rate sweep,NO
+EXP_008,parameter_sweep,transformer,5e-05,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,, ,2,64,4,1,64,4,YES,learning rate sweep,NO
+EXP_009,parameter_sweep,real_nvp,0.001,500,600,7,YES,0,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,5,64,,,,,,,weight decay sweep,NO,
+EXP_010,parameter_sweep,real_nvp,0.001,500,600,7,YES,1e-05,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,5,64,,,,,,,weight decay sweep,NO,
+EXP_011,parameter_sweep,real_nvp,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,5,64,,,,,,,weight decay sweep,NO,
+EXP_012,parameter_sweep,real_nvp,0.001,500,600,7,YES,0.001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,5,64,,,,,,,weight decay sweep,NO,
+EXP_013,parameter_sweep,transformer,0.001,500,600,7,YES,0,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,, ,2,64,4,1,64,4,YES,weight decay sweep,NO
+EXP_014,parameter_sweep,transformer,0.001,500,600,7,YES,1e-05,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,, ,2,64,4,1,64,4,YES,weight decay sweep,NO
+EXP_015,parameter_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,, ,2,64,4,1,64,4,YES,weight decay sweep,NO
+EXP_016,parameter_sweep,transformer,0.001,500,600,7,YES,0.001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,, ,2,64,4,1,64,4,YES,weight decay sweep,NO
+EXP_017,parameter_sweep,real_nvp,0.001,500,600,7,YES,0,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,3,64,,,,,,,number of flow layers sweep,NO,
+EXP_018,parameter_sweep,real_nvp,0.001,500,600,7,YES,0,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,5,64,,,,,,,number of flow layers sweep,NO,
+EXP_019,parameter_sweep,real_nvp,0.001,500,600,7,YES,0,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,7,64,,,,,,,number of flow layers sweep,NO,
+EXP_020,parameter_sweep,real_nvp,0.001,500,600,7,YES,0,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,9,64,,,,,,,number of flow layers sweep,NO,
+EXP_021,parameter_sweep,real_nvp,0.001,500,600,7,YES,0,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,9,32,,,,,,,hidden dimension sweep,NO,
+EXP_022,parameter_sweep,real_nvp,0.001,500,600,7,YES,0,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,9,64,,,,,,,hidden dimension sweep,NO,
+EXP_023,parameter_sweep,real_nvp,0.001,500,600,7,YES,0,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,9,128,,,,,,,hidden dimension sweep,NO,
+EXP_024,parameter_sweep,real_nvp,0.001,500,600,7,YES,0,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,9,256,,,,,,,hidden dimension sweep,NO,
+EXP_025,parameter_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,, ,2,64,2,1,64,4,YES,number of Transformer blocks sweep,NO
+EXP_026,parameter_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,, ,2,64,6,1,64,4,YES,number of Transformer blocks sweep,NO
+EXP_027,parameter_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,, ,2,64,8,1,64,4,YES,number of Transformer blocks sweep,NO
+EXP_028,parameter_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,, ,2,64,10,1,64,4,YES,number of Transformer blocks sweep,NO
+EXP_029,parameter_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,, ,2,64,6,1,16,4,YES,head dimension sweep,YES
+EXP_030,parameter_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,, ,2,64,6,1,32,4,YES,head dimension sweep,YES
+EXP_031,parameter_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,, ,2,64,6,1,128,4,YES,head dimension sweep,YES
+EXP_032,parameter_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,6,1,64,2,YES,expansion sweep,YES
+EXP_033,parameter_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,6,1,64,8,YES,expansion sweep,YES
