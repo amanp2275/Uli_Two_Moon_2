@@ -23,7 +23,7 @@ EXP_021,hidden_features_sweep,real_nvp,0.001,500,600,7,YES,0,6,20,500,512,0.05,3
 EXP_022,hidden_features_sweep,real_nvp,0.001,500,600,7,YES,0,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,9,64,,,,,,,,RealNVP width; reference configuration,NO
 EXP_023,hidden_features_sweep,real_nvp,0.001,500,600,7,YES,0,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,9,128,,,,,,,,RealNVP width,NO
 EXP_024,hidden_features_sweep,real_nvp,0.001,500,600,7,YES,0,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,9,256,,,,,,,,RealNVP width,NO
-EXP_025,transformer_num_blocks_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,2,1,64,4,YES,Transformer num_blocks sweep; 4-block configuration already tested as reference,YES
-EXP_026,transformer_num_blocks_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,6,1,64,4,YES,Transformer num_blocks sweep; 4-block configuration already tested as reference,YES
-EXP_027,transformer_num_blocks_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,8,1,64,4,YES,Transformer num_blocks sweep; 4-block configuration already tested as reference,YES
-EXP_028,transformer_num_blocks_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,10,1,64,4,YES,Transformer num_blocks sweep; 4-block configuration already tested as reference,YES
+EXP_025,parameter_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,2,1,64,4,YES,Transformer num_blocks sweep; 4-block configuration already tested as reference,YES
+EXP_026,parameter_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,6,1,64,4,YES,Transformer num_blocks sweep; 4-block configuration already tested as reference,YES
+EXP_027,parameter_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,8,1,64,4,YES,Transformer num_blocks sweep; 4-block configuration already tested as reference,YES
+EXP_028,parameter_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,10,1,64,4,YES,Transformer num_blocks sweep; 4-block configuration already tested as reference,YES

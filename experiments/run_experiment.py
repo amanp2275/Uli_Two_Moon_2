@@ -5,6 +5,7 @@ import csv
 import hashlib
 import json
 import os
+import re
 import subprocess
 import sys
 import time
@@ -162,8 +163,11 @@ def _run(row: dict[str, str], run_number: int) -> bool:
     try:
         if not experiment_id:
             raise ValueError("experiment_id cannot be empty")
-        if row.get("experiment_type", "").strip() not in {"parameter_sweep", "model_comparison"}:
-            raise ValueError("experiment_type must be parameter_sweep or model_comparison")
+        if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_-]*", experiment_type):
+            raise ValueError(
+                "experiment_type must be a non-empty directory-safe label "
+                "containing only letters, numbers, underscores, or hyphens"
+            )
         experiment_dir.mkdir(parents=True, exist_ok=True)
         config, model_name = _build_config(row, experiment_dir)
         config_path = experiment_dir / "config.json"
