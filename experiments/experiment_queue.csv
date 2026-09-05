@@ -27,8 +27,10 @@ EXP_025,parameter_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05
 EXP_026,parameter_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,, ,2,64,6,1,64,4,YES,number of Transformer blocks sweep,NO
 EXP_027,parameter_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,, ,2,64,8,1,64,4,YES,number of Transformer blocks sweep,NO
 EXP_028,parameter_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,, ,2,64,10,1,64,4,YES,number of Transformer blocks sweep,NO
-EXP_029,parameter_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,, ,2,64,6,1,16,4,YES,head dimension sweep,YES
-EXP_030,parameter_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,, ,2,64,6,1,32,4,YES,head dimension sweep,YES
-EXP_031,parameter_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,, ,2,64,6,1,128,4,YES,head dimension sweep,YES
-EXP_032,parameter_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,6,1,64,2,YES,expansion sweep,YES
-EXP_033,parameter_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,6,1,64,8,YES,expansion sweep,YES
+EXP_029,parameter_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,, ,2,64,6,1,16,4,YES,head dimension sweep, NO
+EXP_030,parameter_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,, ,2,64,6,1,32,4,YES,head dimension sweep,NO
+EXP_031,parameter_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,, ,2,64,6,1,128,4,YES,head dimension sweep,NO
+EXP_032,parameter_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,6,1,64,2,YES,expansion sweep,NO
+EXP_033,parameter_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,6,1,64,4,YES,expansion sweep,NO
+EXP_034,parameter_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,6,1,64,6,YES,expansion sweep,NO
+EXP_035,parameter_sweep,transformer,0.001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,6,2,64,6,YES,expansion sweep,YES
