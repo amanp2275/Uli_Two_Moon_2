@@ -1,0 +1,632 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>All training overview</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 2rem; color: #222; }
+h1 { margin-bottom: .25rem; }
+.links { margin: 1rem 0 2rem; }
+.run { border: 1px solid #ccc; border-radius: 8px; margin: 1rem 0; padding: .8rem; }
+summary { cursor: pointer; font-size: 1.05rem; }
+.plots { display: flex; flex-wrap: wrap; gap: 1rem; margin: 1rem 0; }
+.plots img { max-width: 48%; min-width: 360px; height: auto; border: 1px solid #ddd; }
+table { border-collapse: collapse; margin: .75rem 0; }
+th, td { border: 1px solid #ddd; padding: .3rem .55rem; text-align: left; }
+th { background: #f3f3f3; }
+</style></head><body>
+<h1>All training runs</h1>
+<p>51 completed runs discovered from <code>results/**/metrics.json</code>.</p>
+<p class="links"><a href="all_training_loss_curves.png">Combined loss curves</a> ·
+<a href="all_training_parameters.csv">Parameters and final metrics CSV</a></p>
+<details class="run" open>
+<summary><strong>model_comparison / 02_diff_params_same_results / nll__0.00 / transformer__lr1e-3_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks6_lpb1</strong> — transformer, 
+best validation loss: 0.019771818071603775</summary>
+<div class="plots"><img src="../results/model_comparison/02_diff_params_same_results/nll__0.00/transformer__lr1e-3_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks6_lpb1/loss_curves.png" alt="Loss curves"><img src="../results/model_comparison/02_diff_params_same_results/nll__0.00/transformer__lr1e-3_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks6_lpb1/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>580</td></tr>
+<tr><td>Final train loss</td><td>0.0014239720767363906</td></tr>
+<tr><td>Final validation loss</td><td>0.019771818071603775</td></tr>
+<tr><td>Final test loss</td><td>0.02138512022793293</td></tr>
+<tr><td>Trainable parameters</td><td>396312</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\model_comparison</td></tr><tr><th>seed</th><td>7</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0001</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>None</td></tr><tr><th>in_channels</th><td>2</td></tr><tr><th>channels</th><td>64</td></tr><tr><th>num_blocks</th><td>6</td></tr><tr><th>layers_per_block</th><td>1</td></tr><tr><th>head_dim</th><td>64</td></tr><tr><th>expansion</th><td>2</td></tr><tr><th>nvp</th><td>True</td></tr></table>
+</details><details class="run" open>
+<summary><strong>model_comparison / 02_diff_params_same_results / nll__0.20 / real_nvp__lr1e-3_ep600_bs500_wd0e0_cond1_seed7_layers9_h256</strong> — real_nvp, 
+best validation loss: 0.22320878505706787</summary>
+<div class="plots"><img src="../results/model_comparison/02_diff_params_same_results/nll__0.20/real_nvp__lr1e-3_ep600_bs500_wd0e0_cond1_seed7_layers9_h256/loss_curves.png" alt="Loss curves"><img src="../results/model_comparison/02_diff_params_same_results/nll__0.20/real_nvp__lr1e-3_ep600_bs500_wd0e0_cond1_seed7_layers9_h256/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>580</td></tr>
+<tr><td>Final train loss</td><td>0.22025789320468903</td></tr>
+<tr><td>Final validation loss</td><td>0.22320878505706787</td></tr>
+<tr><td>Final test loss</td><td>0.21989095211029053</td></tr>
+<tr><td>Trainable parameters</td><td>612900</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\model_comparison</td></tr><tr><th>seed</th><td>7</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>None</td></tr><tr><th>num_layers</th><td>9</td></tr><tr><th>hidden_features</th><td>256</td></tr></table>
+</details><details class="run" open>
+<summary><strong>model_comparison / EXP_MS_001 / final_models / real_nvp / run</strong> — real_nvp, 
+best validation loss: 0.22320878505706787</summary>
+<div class="plots"><img src="../results/model_comparison/EXP_MS_001/final_models/real_nvp/run/loss_curves.png" alt="Loss curves"><img src="../results/model_comparison/EXP_MS_001/final_models/real_nvp/run/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>580</td></tr>
+<tr><td>Final train loss</td><td>0.22025789320468903</td></tr>
+<tr><td>Final validation loss</td><td>0.22320878505706787</td></tr>
+<tr><td>Final test loss</td><td>0.21989095211029053</td></tr>
+<tr><td>Trainable parameters</td><td>612900</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\model_comparison</td></tr><tr><th>seed</th><td>7</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>None</td></tr><tr><th>num_layers</th><td>9</td></tr><tr><th>hidden_features</th><td>256</td></tr></table>
+</details><details class="run" open>
+<summary><strong>model_comparison / EXP_MS_001 / final_models / transformer / run</strong> — transformer, 
+best validation loss: 0.019771818071603775</summary>
+<div class="plots"><img src="../results/model_comparison/EXP_MS_001/final_models/transformer/run/loss_curves.png" alt="Loss curves"><img src="../results/model_comparison/EXP_MS_001/final_models/transformer/run/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>580</td></tr>
+<tr><td>Final train loss</td><td>0.0014239720767363906</td></tr>
+<tr><td>Final validation loss</td><td>0.019771818071603775</td></tr>
+<tr><td>Final test loss</td><td>0.02138512022793293</td></tr>
+<tr><td>Trainable parameters</td><td>396312</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\model_comparison</td></tr><tr><th>seed</th><td>7</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0001</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>None</td></tr><tr><th>in_channels</th><td>2</td></tr><tr><th>channels</th><td>64</td></tr><tr><th>num_blocks</th><td>6</td></tr><tr><th>layers_per_block</th><td>1</td></tr><tr><th>head_dim</th><td>64</td></tr><tr><th>expansion</th><td>2</td></tr><tr><th>nvp</th><td>True</td></tr></table>
+</details><details class="run" open>
+<summary><strong>model_comparison / EXP_MS_002 / raw / real_nvp / params__lr1e-3_ep600_bs500_wd0e0_cond1_seed17_layers9_h256</strong> — real_nvp, 
+best validation loss: 0.2243158519268036</summary>
+<div class="plots"><img src="../results/model_comparison/EXP_MS_002/raw/real_nvp/params__lr1e-3_ep600_bs500_wd0e0_cond1_seed17_layers9_h256/loss_curves.png" alt="Loss curves"><img src="../results/model_comparison/EXP_MS_002/raw/real_nvp/params__lr1e-3_ep600_bs500_wd0e0_cond1_seed17_layers9_h256/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>340</td></tr>
+<tr><td>Final train loss</td><td>0.22072473168373108</td></tr>
+<tr><td>Final validation loss</td><td>0.2243158519268036</td></tr>
+<tr><td>Final test loss</td><td>0.22084619104862213</td></tr>
+<tr><td>Trainable parameters</td><td>612900</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\model_comparison\EXP_MS_1\EXP_MS_002</td></tr><tr><th>seed</th><td>17</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>None</td></tr><tr><th>num_layers</th><td>9</td></tr><tr><th>hidden_features</th><td>256</td></tr></table>
+</details><details class="run" open>
+<summary><strong>model_comparison / EXP_MS_002 / raw / transformer / params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed17_ch64_blocks6_lpb1</strong> — transformer, 
+best validation loss: 0.09800080209970474</summary>
+<div class="plots"><img src="../results/model_comparison/EXP_MS_002/raw/transformer/params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed17_ch64_blocks6_lpb1/loss_curves.png" alt="Loss curves"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>600</td></tr>
+<tr><td>Final train loss</td><td>0.07338066399097443</td></tr>
+<tr><td>Final validation loss</td><td>0.09800080209970474</td></tr>
+<tr><td>Final test loss</td><td>0.09878864139318466</td></tr>
+<tr><td>Trainable parameters</td><td>396312</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\model_comparison\EXP_MS_1\EXP_MS_002</td></tr><tr><th>seed</th><td>17</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0001</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>None</td></tr><tr><th>in_channels</th><td>2</td></tr><tr><th>channels</th><td>64</td></tr><tr><th>num_blocks</th><td>6</td></tr><tr><th>layers_per_block</th><td>1</td></tr><tr><th>head_dim</th><td>64</td></tr><tr><th>expansion</th><td>2</td></tr><tr><th>nvp</th><td>True</td></tr></table>
+</details><details class="run" open>
+<summary><strong>model_comparison / EXP_MS_003 / final_models / real_nvp</strong> — real_nvp, 
+best validation loss: 0.22448663413524628</summary>
+<div class="plots"><img src="../results/model_comparison/EXP_MS_003/final_models/real_nvp/loss_curves.png" alt="Loss curves"><img src="../results/model_comparison/EXP_MS_003/final_models/real_nvp/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>140</td></tr>
+<tr><td>Final train loss</td><td>0.22204573452472687</td></tr>
+<tr><td>Final validation loss</td><td>0.22448663413524628</td></tr>
+<tr><td>Final test loss</td><td>0.2216019332408905</td></tr>
+<tr><td>Trainable parameters</td><td>612900</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\model_comparison\EXP_MS_003</td></tr><tr><th>seed</th><td>27</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>None</td></tr><tr><th>num_layers</th><td>9</td></tr><tr><th>hidden_features</th><td>256</td></tr></table>
+</details><details class="run" open>
+<summary><strong>model_comparison / EXP_MS_003 / final_models / transformer</strong> — transformer, 
+best validation loss: 0.02464558742940426</summary>
+<div class="plots"><img src="../results/model_comparison/EXP_MS_003/final_models/transformer/loss_curves.png" alt="Loss curves"><img src="../results/model_comparison/EXP_MS_003/final_models/transformer/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>600</td></tr>
+<tr><td>Final train loss</td><td>-0.006355811841785908</td></tr>
+<tr><td>Final validation loss</td><td>0.02464558742940426</td></tr>
+<tr><td>Final test loss</td><td>0.02459120564162731</td></tr>
+<tr><td>Trainable parameters</td><td>396312</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\model_comparison\EXP_MS_003</td></tr><tr><th>seed</th><td>27</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0001</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>None</td></tr><tr><th>in_channels</th><td>2</td></tr><tr><th>channels</th><td>64</td></tr><tr><th>num_blocks</th><td>6</td></tr><tr><th>layers_per_block</th><td>1</td></tr><tr><th>head_dim</th><td>64</td></tr><tr><th>expansion</th><td>2</td></tr><tr><th>nvp</th><td>True</td></tr></table>
+</details><details class="run" open>
+<summary><strong>model_comparison / EXP_MS_003 / raw / real_nvp / params__lr1e-3_ep600_bs500_wd0e0_cond1_seed27_layers9_h256</strong> — real_nvp, 
+best validation loss: 0.22448663413524628</summary>
+<div class="plots"><img src="../results/model_comparison/EXP_MS_003/raw/real_nvp/params__lr1e-3_ep600_bs500_wd0e0_cond1_seed27_layers9_h256/loss_curves.png" alt="Loss curves"><img src="../results/model_comparison/EXP_MS_003/raw/real_nvp/params__lr1e-3_ep600_bs500_wd0e0_cond1_seed27_layers9_h256/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>140</td></tr>
+<tr><td>Final train loss</td><td>0.22204573452472687</td></tr>
+<tr><td>Final validation loss</td><td>0.22448663413524628</td></tr>
+<tr><td>Final test loss</td><td>0.2216019332408905</td></tr>
+<tr><td>Trainable parameters</td><td>612900</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\model_comparison\EXP_MS_003</td></tr><tr><th>seed</th><td>27</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>None</td></tr><tr><th>num_layers</th><td>9</td></tr><tr><th>hidden_features</th><td>256</td></tr></table>
+</details><details class="run" open>
+<summary><strong>model_comparison / EXP_MS_003 / raw / transformer / params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed27_ch64_blocks6_lpb1</strong> — transformer, 
+best validation loss: 0.02464558742940426</summary>
+<div class="plots"><img src="../results/model_comparison/EXP_MS_003/raw/transformer/params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed27_ch64_blocks6_lpb1/loss_curves.png" alt="Loss curves"><img src="../results/model_comparison/EXP_MS_003/raw/transformer/params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed27_ch64_blocks6_lpb1/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>600</td></tr>
+<tr><td>Final train loss</td><td>-0.006355811841785908</td></tr>
+<tr><td>Final validation loss</td><td>0.02464558742940426</td></tr>
+<tr><td>Final test loss</td><td>0.02459120564162731</td></tr>
+<tr><td>Trainable parameters</td><td>396312</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\model_comparison\EXP_MS_003</td></tr><tr><th>seed</th><td>27</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0001</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>None</td></tr><tr><th>in_channels</th><td>2</td></tr><tr><th>channels</th><td>64</td></tr><tr><th>num_blocks</th><td>6</td></tr><tr><th>layers_per_block</th><td>1</td></tr><tr><th>head_dim</th><td>64</td></tr><tr><th>expansion</th><td>2</td></tr><tr><th>nvp</th><td>True</td></tr></table>
+</details><details class="run" open>
+<summary><strong>model_comparison / EXP_MS_004 / final_models / real_nvp</strong> — real_nvp, 
+best validation loss: 0.22322534024715424</summary>
+<div class="plots"><img src="../results/model_comparison/EXP_MS_004/final_models/real_nvp/loss_curves.png" alt="Loss curves"><img src="../results/model_comparison/EXP_MS_004/final_models/real_nvp/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>280</td></tr>
+<tr><td>Final train loss</td><td>0.22040747106075287</td></tr>
+<tr><td>Final validation loss</td><td>0.22322534024715424</td></tr>
+<tr><td>Final test loss</td><td>0.2197997272014618</td></tr>
+<tr><td>Trainable parameters</td><td>612900</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\model_comparison\EXP_MS_004</td></tr><tr><th>seed</th><td>37</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>None</td></tr><tr><th>num_layers</th><td>9</td></tr><tr><th>hidden_features</th><td>256</td></tr></table>
+</details><details class="run" open>
+<summary><strong>model_comparison / EXP_MS_004 / final_models / transformer</strong> — transformer, 
+best validation loss: 0.09339313954114914</summary>
+<div class="plots"><img src="../results/model_comparison/EXP_MS_004/final_models/transformer/loss_curves.png" alt="Loss curves"><img src="../results/model_comparison/EXP_MS_004/final_models/transformer/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>600</td></tr>
+<tr><td>Final train loss</td><td>0.069224514067173</td></tr>
+<tr><td>Final validation loss</td><td>0.09339313954114914</td></tr>
+<tr><td>Final test loss</td><td>0.09123842418193817</td></tr>
+<tr><td>Trainable parameters</td><td>396312</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\model_comparison\EXP_MS_004</td></tr><tr><th>seed</th><td>37</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0001</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>None</td></tr><tr><th>in_channels</th><td>2</td></tr><tr><th>channels</th><td>64</td></tr><tr><th>num_blocks</th><td>6</td></tr><tr><th>layers_per_block</th><td>1</td></tr><tr><th>head_dim</th><td>64</td></tr><tr><th>expansion</th><td>2</td></tr><tr><th>nvp</th><td>True</td></tr></table>
+</details><details class="run" open>
+<summary><strong>model_comparison / EXP_MS_004 / raw / real_nvp / params__lr1e-3_ep600_bs500_wd0e0_cond1_seed37_layers9_h256</strong> — real_nvp, 
+best validation loss: 0.22322534024715424</summary>
+<div class="plots"><img src="../results/model_comparison/EXP_MS_004/raw/real_nvp/params__lr1e-3_ep600_bs500_wd0e0_cond1_seed37_layers9_h256/loss_curves.png" alt="Loss curves"><img src="../results/model_comparison/EXP_MS_004/raw/real_nvp/params__lr1e-3_ep600_bs500_wd0e0_cond1_seed37_layers9_h256/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>280</td></tr>
+<tr><td>Final train loss</td><td>0.22040747106075287</td></tr>
+<tr><td>Final validation loss</td><td>0.22322534024715424</td></tr>
+<tr><td>Final test loss</td><td>0.2197997272014618</td></tr>
+<tr><td>Trainable parameters</td><td>612900</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\model_comparison\EXP_MS_004</td></tr><tr><th>seed</th><td>37</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>None</td></tr><tr><th>num_layers</th><td>9</td></tr><tr><th>hidden_features</th><td>256</td></tr></table>
+</details><details class="run" open>
+<summary><strong>model_comparison / EXP_MS_004 / raw / transformer / params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed37_ch64_blocks6_lpb1</strong> — transformer, 
+best validation loss: 0.09339313954114914</summary>
+<div class="plots"><img src="../results/model_comparison/EXP_MS_004/raw/transformer/params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed37_ch64_blocks6_lpb1/loss_curves.png" alt="Loss curves"><img src="../results/model_comparison/EXP_MS_004/raw/transformer/params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed37_ch64_blocks6_lpb1/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>600</td></tr>
+<tr><td>Final train loss</td><td>0.069224514067173</td></tr>
+<tr><td>Final validation loss</td><td>0.09339313954114914</td></tr>
+<tr><td>Final test loss</td><td>0.09123842418193817</td></tr>
+<tr><td>Trainable parameters</td><td>396312</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\model_comparison\EXP_MS_004</td></tr><tr><th>seed</th><td>37</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0001</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>None</td></tr><tr><th>in_channels</th><td>2</td></tr><tr><th>channels</th><td>64</td></tr><tr><th>num_blocks</th><td>6</td></tr><tr><th>layers_per_block</th><td>1</td></tr><tr><th>head_dim</th><td>64</td></tr><tr><th>expansion</th><td>2</td></tr><tr><th>nvp</th><td>True</td></tr></table>
+</details><details class="run" open>
+<summary><strong>model_comparison / EXP_MS_005 / final_models / real_nvp</strong> — real_nvp, 
+best validation loss: 0.22287553548812866</summary>
+<div class="plots"><img src="../results/model_comparison/EXP_MS_005/final_models/real_nvp/loss_curves.png" alt="Loss curves"><img src="../results/model_comparison/EXP_MS_005/final_models/real_nvp/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>540</td></tr>
+<tr><td>Final train loss</td><td>0.21976003050804138</td></tr>
+<tr><td>Final validation loss</td><td>0.22287553548812866</td></tr>
+<tr><td>Final test loss</td><td>0.2197277992963791</td></tr>
+<tr><td>Trainable parameters</td><td>612900</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\model_comparison\EXP_MS_005</td></tr><tr><th>seed</th><td>47</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>None</td></tr><tr><th>num_layers</th><td>9</td></tr><tr><th>hidden_features</th><td>256</td></tr></table>
+</details><details class="run" open>
+<summary><strong>model_comparison / EXP_MS_005 / final_models / transformer</strong> — transformer, 
+best validation loss: 0.007680849172174931</summary>
+<div class="plots"><img src="../results/model_comparison/EXP_MS_005/final_models/transformer/loss_curves.png" alt="Loss curves"><img src="../results/model_comparison/EXP_MS_005/final_models/transformer/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>600</td></tr>
+<tr><td>Final train loss</td><td>-0.02184329554438591</td></tr>
+<tr><td>Final validation loss</td><td>0.007680849172174931</td></tr>
+<tr><td>Final test loss</td><td>0.006273004692047834</td></tr>
+<tr><td>Trainable parameters</td><td>396312</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\model_comparison\EXP_MS_005</td></tr><tr><th>seed</th><td>47</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0001</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>None</td></tr><tr><th>in_channels</th><td>2</td></tr><tr><th>channels</th><td>64</td></tr><tr><th>num_blocks</th><td>6</td></tr><tr><th>layers_per_block</th><td>1</td></tr><tr><th>head_dim</th><td>64</td></tr><tr><th>expansion</th><td>2</td></tr><tr><th>nvp</th><td>True</td></tr></table>
+</details><details class="run" open>
+<summary><strong>model_comparison / EXP_MS_005 / raw / real_nvp / params__lr1e-3_ep600_bs500_wd0e0_cond1_seed47_layers9_h256</strong> — real_nvp, 
+best validation loss: 0.22287553548812866</summary>
+<div class="plots"><img src="../results/model_comparison/EXP_MS_005/raw/real_nvp/params__lr1e-3_ep600_bs500_wd0e0_cond1_seed47_layers9_h256/loss_curves.png" alt="Loss curves"><img src="../results/model_comparison/EXP_MS_005/raw/real_nvp/params__lr1e-3_ep600_bs500_wd0e0_cond1_seed47_layers9_h256/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>540</td></tr>
+<tr><td>Final train loss</td><td>0.21976003050804138</td></tr>
+<tr><td>Final validation loss</td><td>0.22287553548812866</td></tr>
+<tr><td>Final test loss</td><td>0.2197277992963791</td></tr>
+<tr><td>Trainable parameters</td><td>612900</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\model_comparison\EXP_MS_005</td></tr><tr><th>seed</th><td>47</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>None</td></tr><tr><th>num_layers</th><td>9</td></tr><tr><th>hidden_features</th><td>256</td></tr></table>
+</details><details class="run" open>
+<summary><strong>model_comparison / EXP_MS_005 / raw / transformer / params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed47_ch64_blocks6_lpb1</strong> — transformer, 
+best validation loss: 0.007680849172174931</summary>
+<div class="plots"><img src="../results/model_comparison/EXP_MS_005/raw/transformer/params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed47_ch64_blocks6_lpb1/loss_curves.png" alt="Loss curves"><img src="../results/model_comparison/EXP_MS_005/raw/transformer/params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed47_ch64_blocks6_lpb1/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>600</td></tr>
+<tr><td>Final train loss</td><td>-0.02184329554438591</td></tr>
+<tr><td>Final validation loss</td><td>0.007680849172174931</td></tr>
+<tr><td>Final test loss</td><td>0.006273004692047834</td></tr>
+<tr><td>Trainable parameters</td><td>396312</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\model_comparison\EXP_MS_005</td></tr><tr><th>seed</th><td>47</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0001</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>None</td></tr><tr><th>in_channels</th><td>2</td></tr><tr><th>channels</th><td>64</td></tr><tr><th>num_blocks</th><td>6</td></tr><tr><th>layers_per_block</th><td>1</td></tr><tr><th>head_dim</th><td>64</td></tr><tr><th>expansion</th><td>2</td></tr><tr><th>nvp</th><td>True</td></tr></table>
+</details><details class="run" open>
+<summary><strong>model_comparison / raw / real_nvp / params__lr1e-3_ep600_bs500_wd0e0_cond1_seed7_layers9_h256</strong> — real_nvp, 
+best validation loss: 0.22320878505706787</summary>
+<div class="plots"><img src="../results/model_comparison/raw/real_nvp/params__lr1e-3_ep600_bs500_wd0e0_cond1_seed7_layers9_h256/loss_curves.png" alt="Loss curves"><img src="../results/model_comparison/raw/real_nvp/params__lr1e-3_ep600_bs500_wd0e0_cond1_seed7_layers9_h256/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>580</td></tr>
+<tr><td>Final train loss</td><td>0.22025789320468903</td></tr>
+<tr><td>Final validation loss</td><td>0.22320878505706787</td></tr>
+<tr><td>Final test loss</td><td>0.21989095211029053</td></tr>
+<tr><td>Trainable parameters</td><td>612900</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\model_comparison</td></tr><tr><th>seed</th><td>7</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>None</td></tr><tr><th>num_layers</th><td>9</td></tr><tr><th>hidden_features</th><td>256</td></tr></table>
+</details><details class="run" open>
+<summary><strong>model_comparison / raw / transformer / params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks6_lpb1</strong> — transformer, 
+best validation loss: 0.019771818071603775</summary>
+<div class="plots"><img src="../results/model_comparison/raw/transformer/params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks6_lpb1/loss_curves.png" alt="Loss curves"><img src="../results/model_comparison/raw/transformer/params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks6_lpb1/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>580</td></tr>
+<tr><td>Final train loss</td><td>0.0014239720767363906</td></tr>
+<tr><td>Final validation loss</td><td>0.019771818071603775</td></tr>
+<tr><td>Final test loss</td><td>0.02138512022793293</td></tr>
+<tr><td>Trainable parameters</td><td>396312</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\model_comparison</td></tr><tr><th>seed</th><td>7</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0001</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>None</td></tr><tr><th>in_channels</th><td>2</td></tr><tr><th>channels</th><td>64</td></tr><tr><th>num_blocks</th><td>6</td></tr><tr><th>layers_per_block</th><td>1</td></tr><tr><th>head_dim</th><td>64</td></tr><tr><th>expansion</th><td>2</td></tr><tr><th>nvp</th><td>True</td></tr></table>
+</details><details class="run" open>
+<summary><strong>parameter_sweep / EXP_001 / run_001 / raw / real_nvp / params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed7_layers5_h64</strong> — real_nvp, 
+best validation loss: 0.22851364314556122</summary>
+<div class="plots"><img src="../results/parameter_sweep/EXP_001/run_001/raw/real_nvp/params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed7_layers5_h64/loss_curves.png" alt="Loss curves"><img src="../results/parameter_sweep/EXP_001/run_001/raw/real_nvp/params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed7_layers5_h64/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>580</td></tr>
+<tr><td>Final train loss</td><td>0.22569844126701355</td></tr>
+<tr><td>Final validation loss</td><td>0.22851364314556122</td></tr>
+<tr><td>Final test loss</td><td>0.2253088504076004</td></tr>
+<tr><td>Trainable parameters</td><td>23700</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\parameter_sweep\EXP_001\run_001</td></tr><tr><th>seed</th><td>7</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0001</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>cuda</td></tr><tr><th>num_layers</th><td>5</td></tr><tr><th>hidden_features</th><td>64</td></tr></table>
+</details><details class="run" open>
+<summary><strong>parameter_sweep / EXP_002 / run_001 / raw / real_nvp / params__lr5e-4_ep600_bs500_wd1e-4_cond1_seed7_layers5_h64</strong> — real_nvp, 
+best validation loss: 0.23315809667110443</summary>
+<div class="plots"><img src="../results/parameter_sweep/EXP_002/run_001/raw/real_nvp/params__lr5e-4_ep600_bs500_wd1e-4_cond1_seed7_layers5_h64/loss_curves.png" alt="Loss curves"><img src="../results/parameter_sweep/EXP_002/run_001/raw/real_nvp/params__lr5e-4_ep600_bs500_wd1e-4_cond1_seed7_layers5_h64/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>600</td></tr>
+<tr><td>Final train loss</td><td>0.2305927574634552</td></tr>
+<tr><td>Final validation loss</td><td>0.23315809667110443</td></tr>
+<tr><td>Final test loss</td><td>0.23032109439373016</td></tr>
+<tr><td>Trainable parameters</td><td>23700</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\parameter_sweep\EXP_002\run_001</td></tr><tr><th>seed</th><td>7</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.0005</td></tr><tr><th>weight_decay</th><td>0.0001</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>cuda</td></tr><tr><th>num_layers</th><td>5</td></tr><tr><th>hidden_features</th><td>64</td></tr></table>
+</details><details class="run" open>
+<summary><strong>parameter_sweep / EXP_003 / run_001 / raw / real_nvp / params__lr1e-4_ep600_bs500_wd1e-4_cond1_seed7_layers5_h64</strong> — real_nvp, 
+best validation loss: 0.36858367919921875</summary>
+<div class="plots"><img src="../results/parameter_sweep/EXP_003/run_001/raw/real_nvp/params__lr1e-4_ep600_bs500_wd1e-4_cond1_seed7_layers5_h64/loss_curves.png" alt="Loss curves"><img src="../results/parameter_sweep/EXP_003/run_001/raw/real_nvp/params__lr1e-4_ep600_bs500_wd1e-4_cond1_seed7_layers5_h64/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>600</td></tr>
+<tr><td>Final train loss</td><td>0.3708568215370178</td></tr>
+<tr><td>Final validation loss</td><td>0.36858367919921875</td></tr>
+<tr><td>Final test loss</td><td>0.3693307340145111</td></tr>
+<tr><td>Trainable parameters</td><td>23700</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\parameter_sweep\EXP_003\run_001</td></tr><tr><th>seed</th><td>7</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.0001</td></tr><tr><th>weight_decay</th><td>0.0001</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>cuda</td></tr><tr><th>num_layers</th><td>5</td></tr><tr><th>hidden_features</th><td>64</td></tr></table>
+</details><details class="run" open>
+<summary><strong>parameter_sweep / EXP_004 / run_001 / raw / real_nvp / params__lr5e-5_ep600_bs500_wd1e-4_cond1_seed7_layers5_h64</strong> — real_nvp, 
+best validation loss: 0.909699559211731</summary>
+<div class="plots"><img src="../results/parameter_sweep/EXP_004/run_001/raw/real_nvp/params__lr5e-5_ep600_bs500_wd1e-4_cond1_seed7_layers5_h64/loss_curves.png" alt="Loss curves"><img src="../results/parameter_sweep/EXP_004/run_001/raw/real_nvp/params__lr5e-5_ep600_bs500_wd1e-4_cond1_seed7_layers5_h64/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>600</td></tr>
+<tr><td>Final train loss</td><td>0.9147862195968628</td></tr>
+<tr><td>Final validation loss</td><td>0.909699559211731</td></tr>
+<tr><td>Final test loss</td><td>0.9120297431945801</td></tr>
+<tr><td>Trainable parameters</td><td>23700</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\parameter_sweep\EXP_004\run_001</td></tr><tr><th>seed</th><td>7</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>5e-05</td></tr><tr><th>weight_decay</th><td>0.0001</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>cuda</td></tr><tr><th>num_layers</th><td>5</td></tr><tr><th>hidden_features</th><td>64</td></tr></table>
+</details><details class="run" open>
+<summary><strong>parameter_sweep / EXP_005 / run_001 / raw / transformer / params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks4_lpb1</strong> — transformer, 
+best validation loss: 0.1416914016008377</summary>
+<div class="plots"><img src="../results/parameter_sweep/EXP_005/run_001/raw/transformer/params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks4_lpb1/loss_curves.png" alt="Loss curves"><img src="../results/parameter_sweep/EXP_005/run_001/raw/transformer/params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks4_lpb1/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>540</td></tr>
+<tr><td>Final train loss</td><td>0.12691181898117065</td></tr>
+<tr><td>Final validation loss</td><td>0.1416914016008377</td></tr>
+<tr><td>Final test loss</td><td>0.14332658052444458</td></tr>
+<tr><td>Trainable parameters</td><td>330256</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\parameter_sweep\EXP_005\run_001</td></tr><tr><th>seed</th><td>7</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0001</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>cuda</td></tr><tr><th>in_channels</th><td>2</td></tr><tr><th>channels</th><td>64</td></tr><tr><th>num_blocks</th><td>4</td></tr><tr><th>layers_per_block</th><td>1</td></tr><tr><th>head_dim</th><td>64</td></tr><tr><th>expansion</th><td>4</td></tr><tr><th>nvp</th><td>True</td></tr></table>
+</details><details class="run" open>
+<summary><strong>parameter_sweep / EXP_006 / run_001 / raw / transformer / params__lr5e-4_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks4_lpb1</strong> — transformer, 
+best validation loss: 0.18517306447029114</summary>
+<div class="plots"><img src="../results/parameter_sweep/EXP_006/run_001/raw/transformer/params__lr5e-4_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks4_lpb1/loss_curves.png" alt="Loss curves"><img src="../results/parameter_sweep/EXP_006/run_001/raw/transformer/params__lr5e-4_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks4_lpb1/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>580</td></tr>
+<tr><td>Final train loss</td><td>0.17020319402217865</td></tr>
+<tr><td>Final validation loss</td><td>0.18517306447029114</td></tr>
+<tr><td>Final test loss</td><td>0.18406011164188385</td></tr>
+<tr><td>Trainable parameters</td><td>330256</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\parameter_sweep\EXP_006\run_001</td></tr><tr><th>seed</th><td>7</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.0005</td></tr><tr><th>weight_decay</th><td>0.0001</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>cuda</td></tr><tr><th>in_channels</th><td>2</td></tr><tr><th>channels</th><td>64</td></tr><tr><th>num_blocks</th><td>4</td></tr><tr><th>layers_per_block</th><td>1</td></tr><tr><th>head_dim</th><td>64</td></tr><tr><th>expansion</th><td>4</td></tr><tr><th>nvp</th><td>True</td></tr></table>
+</details><details class="run" open>
+<summary><strong>parameter_sweep / EXP_007 / run_001 / raw / transformer / params__lr1e-4_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks4_lpb1</strong> — transformer, 
+best validation loss: 0.35920828580856323</summary>
+<div class="plots"><img src="../results/parameter_sweep/EXP_007/run_001/raw/transformer/params__lr1e-4_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks4_lpb1/loss_curves.png" alt="Loss curves"><img src="../results/parameter_sweep/EXP_007/run_001/raw/transformer/params__lr1e-4_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks4_lpb1/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>600</td></tr>
+<tr><td>Final train loss</td><td>0.34935739636421204</td></tr>
+<tr><td>Final validation loss</td><td>0.35920828580856323</td></tr>
+<tr><td>Final test loss</td><td>0.36109405755996704</td></tr>
+<tr><td>Trainable parameters</td><td>330256</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\parameter_sweep\EXP_007\run_001</td></tr><tr><th>seed</th><td>7</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.0001</td></tr><tr><th>weight_decay</th><td>0.0001</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>cuda</td></tr><tr><th>in_channels</th><td>2</td></tr><tr><th>channels</th><td>64</td></tr><tr><th>num_blocks</th><td>4</td></tr><tr><th>layers_per_block</th><td>1</td></tr><tr><th>head_dim</th><td>64</td></tr><tr><th>expansion</th><td>4</td></tr><tr><th>nvp</th><td>True</td></tr></table>
+</details><details class="run" open>
+<summary><strong>parameter_sweep / EXP_008 / run_001 / raw / transformer / params__lr5e-5_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks4_lpb1</strong> — transformer, 
+best validation loss: 0.5608579516410828</summary>
+<div class="plots"><img src="../results/parameter_sweep/EXP_008/run_001/raw/transformer/params__lr5e-5_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks4_lpb1/loss_curves.png" alt="Loss curves"><img src="../results/parameter_sweep/EXP_008/run_001/raw/transformer/params__lr5e-5_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks4_lpb1/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>600</td></tr>
+<tr><td>Final train loss</td><td>0.5552662014961243</td></tr>
+<tr><td>Final validation loss</td><td>0.5608579516410828</td></tr>
+<tr><td>Final test loss</td><td>0.5622392892837524</td></tr>
+<tr><td>Trainable parameters</td><td>330256</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\parameter_sweep\EXP_008\run_001</td></tr><tr><th>seed</th><td>7</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>5e-05</td></tr><tr><th>weight_decay</th><td>0.0001</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>cuda</td></tr><tr><th>in_channels</th><td>2</td></tr><tr><th>channels</th><td>64</td></tr><tr><th>num_blocks</th><td>4</td></tr><tr><th>layers_per_block</th><td>1</td></tr><tr><th>head_dim</th><td>64</td></tr><tr><th>expansion</th><td>4</td></tr><tr><th>nvp</th><td>True</td></tr></table>
+</details><details class="run" open>
+<summary><strong>parameter_sweep / EXP_009 / run_001 / raw / real_nvp / params__lr1e-3_ep600_bs500_wd0e0_cond1_seed7_layers5_h64</strong> — real_nvp, 
+best validation loss: 0.226769357919693</summary>
+<div class="plots"><img src="../results/parameter_sweep/EXP_009/run_001/raw/real_nvp/params__lr1e-3_ep600_bs500_wd0e0_cond1_seed7_layers5_h64/loss_curves.png" alt="Loss curves"><img src="../results/parameter_sweep/EXP_009/run_001/raw/real_nvp/params__lr1e-3_ep600_bs500_wd0e0_cond1_seed7_layers5_h64/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>600</td></tr>
+<tr><td>Final train loss</td><td>0.2241383194923401</td></tr>
+<tr><td>Final validation loss</td><td>0.226769357919693</td></tr>
+<tr><td>Final test loss</td><td>0.22393448650836945</td></tr>
+<tr><td>Trainable parameters</td><td>23700</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\parameter_sweep\EXP_009\run_001</td></tr><tr><th>seed</th><td>7</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>cuda</td></tr><tr><th>num_layers</th><td>5</td></tr><tr><th>hidden_features</th><td>64</td></tr></table>
+</details><details class="run" open>
+<summary><strong>parameter_sweep / EXP_010 / run_001 / raw / real_nvp / params__lr1e-3_ep600_bs500_wd1e-5_cond1_seed7_layers5_h64</strong> — real_nvp, 
+best validation loss: 0.22864492237567902</summary>
+<div class="plots"><img src="../results/parameter_sweep/EXP_010/run_001/raw/real_nvp/params__lr1e-3_ep600_bs500_wd1e-5_cond1_seed7_layers5_h64/loss_curves.png" alt="Loss curves"><img src="../results/parameter_sweep/EXP_010/run_001/raw/real_nvp/params__lr1e-3_ep600_bs500_wd1e-5_cond1_seed7_layers5_h64/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>600</td></tr>
+<tr><td>Final train loss</td><td>0.22566969692707062</td></tr>
+<tr><td>Final validation loss</td><td>0.22864492237567902</td></tr>
+<tr><td>Final test loss</td><td>0.22560429573059082</td></tr>
+<tr><td>Trainable parameters</td><td>23700</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\parameter_sweep\EXP_010\run_001</td></tr><tr><th>seed</th><td>7</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>1e-05</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>cuda</td></tr><tr><th>num_layers</th><td>5</td></tr><tr><th>hidden_features</th><td>64</td></tr></table>
+</details><details class="run" open>
+<summary><strong>parameter_sweep / EXP_011 / run_001 / raw / real_nvp / params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed7_layers5_h64</strong> — real_nvp, 
+best validation loss: 0.22872644662857056</summary>
+<div class="plots"><img src="../results/parameter_sweep/EXP_011/run_001/raw/real_nvp/params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed7_layers5_h64/loss_curves.png" alt="Loss curves"><img src="../results/parameter_sweep/EXP_011/run_001/raw/real_nvp/params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed7_layers5_h64/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>580</td></tr>
+<tr><td>Final train loss</td><td>0.22628240287303925</td></tr>
+<tr><td>Final validation loss</td><td>0.22872644662857056</td></tr>
+<tr><td>Final test loss</td><td>0.22633621096611023</td></tr>
+<tr><td>Trainable parameters</td><td>23700</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\parameter_sweep\EXP_011\run_001</td></tr><tr><th>seed</th><td>7</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0001</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>cuda</td></tr><tr><th>num_layers</th><td>5</td></tr><tr><th>hidden_features</th><td>64</td></tr></table>
+</details><details class="run" open>
+<summary><strong>parameter_sweep / EXP_012 / run_001 / raw / real_nvp / params__lr1e-3_ep600_bs500_wd1e-3_cond1_seed7_layers5_h64</strong> — real_nvp, 
+best validation loss: 0.23413003981113434</summary>
+<div class="plots"><img src="../results/parameter_sweep/EXP_012/run_001/raw/real_nvp/params__lr1e-3_ep600_bs500_wd1e-3_cond1_seed7_layers5_h64/loss_curves.png" alt="Loss curves"><img src="../results/parameter_sweep/EXP_012/run_001/raw/real_nvp/params__lr1e-3_ep600_bs500_wd1e-3_cond1_seed7_layers5_h64/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>580</td></tr>
+<tr><td>Final train loss</td><td>0.2325121909379959</td></tr>
+<tr><td>Final validation loss</td><td>0.23413003981113434</td></tr>
+<tr><td>Final test loss</td><td>0.23180809617042542</td></tr>
+<tr><td>Trainable parameters</td><td>23700</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\parameter_sweep\EXP_012\run_001</td></tr><tr><th>seed</th><td>7</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.001</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>cuda</td></tr><tr><th>num_layers</th><td>5</td></tr><tr><th>hidden_features</th><td>64</td></tr></table>
+</details><details class="run" open>
+<summary><strong>parameter_sweep / EXP_013 / run_001 / raw / transformer / params__lr1e-3_ep600_bs500_wd0e0_cond1_seed7_ch64_blocks4_lpb1</strong> — transformer, 
+best validation loss: 0.17922194302082062</summary>
+<div class="plots"><img src="../results/parameter_sweep/EXP_013/run_001/raw/transformer/params__lr1e-3_ep600_bs500_wd0e0_cond1_seed7_ch64_blocks4_lpb1/loss_curves.png" alt="Loss curves"><img src="../results/parameter_sweep/EXP_013/run_001/raw/transformer/params__lr1e-3_ep600_bs500_wd0e0_cond1_seed7_ch64_blocks4_lpb1/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>560</td></tr>
+<tr><td>Final train loss</td><td>0.15759077668190002</td></tr>
+<tr><td>Final validation loss</td><td>0.17922194302082062</td></tr>
+<tr><td>Final test loss</td><td>0.176890566945076</td></tr>
+<tr><td>Trainable parameters</td><td>330256</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\parameter_sweep\EXP_013\run_001</td></tr><tr><th>seed</th><td>7</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>cuda</td></tr><tr><th>in_channels</th><td>2</td></tr><tr><th>channels</th><td>64</td></tr><tr><th>num_blocks</th><td>4</td></tr><tr><th>layers_per_block</th><td>1</td></tr><tr><th>head_dim</th><td>64</td></tr><tr><th>expansion</th><td>4</td></tr><tr><th>nvp</th><td>True</td></tr></table>
+</details><details class="run" open>
+<summary><strong>parameter_sweep / EXP_014 / run_001 / raw / transformer / params__lr1e-3_ep600_bs500_wd1e-5_cond1_seed7_ch64_blocks4_lpb1</strong> — transformer, 
+best validation loss: 0.15277205407619476</summary>
+<div class="plots"><img src="../results/parameter_sweep/EXP_014/run_001/raw/transformer/params__lr1e-3_ep600_bs500_wd1e-5_cond1_seed7_ch64_blocks4_lpb1/loss_curves.png" alt="Loss curves"><img src="../results/parameter_sweep/EXP_014/run_001/raw/transformer/params__lr1e-3_ep600_bs500_wd1e-5_cond1_seed7_ch64_blocks4_lpb1/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>600</td></tr>
+<tr><td>Final train loss</td><td>0.13200029730796814</td></tr>
+<tr><td>Final validation loss</td><td>0.15277205407619476</td></tr>
+<tr><td>Final test loss</td><td>0.1538943201303482</td></tr>
+<tr><td>Trainable parameters</td><td>330256</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\parameter_sweep\EXP_014\run_001</td></tr><tr><th>seed</th><td>7</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>1e-05</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>cuda</td></tr><tr><th>in_channels</th><td>2</td></tr><tr><th>channels</th><td>64</td></tr><tr><th>num_blocks</th><td>4</td></tr><tr><th>layers_per_block</th><td>1</td></tr><tr><th>head_dim</th><td>64</td></tr><tr><th>expansion</th><td>4</td></tr><tr><th>nvp</th><td>True</td></tr></table>
+</details><details class="run" open>
+<summary><strong>parameter_sweep / EXP_015 / run_001 / raw / transformer / params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks4_lpb1</strong> — transformer, 
+best validation loss: 0.1416914016008377</summary>
+<div class="plots"><img src="../results/parameter_sweep/EXP_015/run_001/raw/transformer/params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks4_lpb1/loss_curves.png" alt="Loss curves"><img src="../results/parameter_sweep/EXP_015/run_001/raw/transformer/params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks4_lpb1/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>540</td></tr>
+<tr><td>Final train loss</td><td>0.12691181898117065</td></tr>
+<tr><td>Final validation loss</td><td>0.1416914016008377</td></tr>
+<tr><td>Final test loss</td><td>0.14332658052444458</td></tr>
+<tr><td>Trainable parameters</td><td>330256</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\parameter_sweep\EXP_015\run_001</td></tr><tr><th>seed</th><td>7</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0001</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>cuda</td></tr><tr><th>in_channels</th><td>2</td></tr><tr><th>channels</th><td>64</td></tr><tr><th>num_blocks</th><td>4</td></tr><tr><th>layers_per_block</th><td>1</td></tr><tr><th>head_dim</th><td>64</td></tr><tr><th>expansion</th><td>4</td></tr><tr><th>nvp</th><td>True</td></tr></table>
+</details><details class="run" open>
+<summary><strong>parameter_sweep / EXP_016 / run_001 / raw / transformer / params__lr1e-3_ep600_bs500_wd1e-3_cond1_seed7_ch64_blocks4_lpb1</strong> — transformer, 
+best validation loss: 0.1746838241815567</summary>
+<div class="plots"><img src="../results/parameter_sweep/EXP_016/run_001/raw/transformer/params__lr1e-3_ep600_bs500_wd1e-3_cond1_seed7_ch64_blocks4_lpb1/loss_curves.png" alt="Loss curves"><img src="../results/parameter_sweep/EXP_016/run_001/raw/transformer/params__lr1e-3_ep600_bs500_wd1e-3_cond1_seed7_ch64_blocks4_lpb1/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>580</td></tr>
+<tr><td>Final train loss</td><td>0.16387654840946198</td></tr>
+<tr><td>Final validation loss</td><td>0.1746838241815567</td></tr>
+<tr><td>Final test loss</td><td>0.17571872472763062</td></tr>
+<tr><td>Trainable parameters</td><td>330256</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\parameter_sweep\EXP_016\run_001</td></tr><tr><th>seed</th><td>7</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.001</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>cuda</td></tr><tr><th>in_channels</th><td>2</td></tr><tr><th>channels</th><td>64</td></tr><tr><th>num_blocks</th><td>4</td></tr><tr><th>layers_per_block</th><td>1</td></tr><tr><th>head_dim</th><td>64</td></tr><tr><th>expansion</th><td>4</td></tr><tr><th>nvp</th><td>True</td></tr></table>
+</details><details class="run" open>
+<summary><strong>parameter_sweep / EXP_017 / run_001 / raw / real_nvp / params__lr1e-3_ep600_bs500_wd0e0_cond1_seed7_layers3_h64</strong> — real_nvp, 
+best validation loss: 0.2719683051109314</summary>
+<div class="plots"><img src="../results/parameter_sweep/EXP_017/run_001/raw/real_nvp/params__lr1e-3_ep600_bs500_wd0e0_cond1_seed7_layers3_h64/loss_curves.png" alt="Loss curves"><img src="../results/parameter_sweep/EXP_017/run_001/raw/real_nvp/params__lr1e-3_ep600_bs500_wd0e0_cond1_seed7_layers3_h64/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>580</td></tr>
+<tr><td>Final train loss</td><td>0.27023178339004517</td></tr>
+<tr><td>Final validation loss</td><td>0.2719683051109314</td></tr>
+<tr><td>Final test loss</td><td>0.2681090235710144</td></tr>
+<tr><td>Trainable parameters</td><td>14220</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\parameter_sweep\EXP_017\run_001</td></tr><tr><th>seed</th><td>7</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>cuda</td></tr><tr><th>num_layers</th><td>3</td></tr><tr><th>hidden_features</th><td>64</td></tr></table>
+</details><details class="run" open>
+<summary><strong>parameter_sweep / EXP_019 / run_001 / raw / real_nvp / params__lr1e-3_ep600_bs500_wd0e0_cond1_seed7_layers7_h64</strong> — real_nvp, 
+best validation loss: 0.22705672681331635</summary>
+<div class="plots"><img src="../results/parameter_sweep/EXP_019/run_001/raw/real_nvp/params__lr1e-3_ep600_bs500_wd0e0_cond1_seed7_layers7_h64/loss_curves.png" alt="Loss curves"><img src="../results/parameter_sweep/EXP_019/run_001/raw/real_nvp/params__lr1e-3_ep600_bs500_wd0e0_cond1_seed7_layers7_h64/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>580</td></tr>
+<tr><td>Final train loss</td><td>0.22391751408576965</td></tr>
+<tr><td>Final validation loss</td><td>0.22705672681331635</td></tr>
+<tr><td>Final test loss</td><td>0.22384968400001526</td></tr>
+<tr><td>Trainable parameters</td><td>33180</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\parameter_sweep\EXP_019\run_001</td></tr><tr><th>seed</th><td>7</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>cuda</td></tr><tr><th>num_layers</th><td>7</td></tr><tr><th>hidden_features</th><td>64</td></tr></table>
+</details><details class="run" open>
+<summary><strong>parameter_sweep / EXP_020 / run_001 / raw / real_nvp / params__lr1e-3_ep600_bs500_wd0e0_cond1_seed7_layers9_h64</strong> — real_nvp, 
+best validation loss: 0.22332827746868134</summary>
+<div class="plots"><img src="../results/parameter_sweep/EXP_020/run_001/raw/real_nvp/params__lr1e-3_ep600_bs500_wd0e0_cond1_seed7_layers9_h64/loss_curves.png" alt="Loss curves"><img src="../results/parameter_sweep/EXP_020/run_001/raw/real_nvp/params__lr1e-3_ep600_bs500_wd0e0_cond1_seed7_layers9_h64/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>600</td></tr>
+<tr><td>Final train loss</td><td>0.22057652473449707</td></tr>
+<tr><td>Final validation loss</td><td>0.22332827746868134</td></tr>
+<tr><td>Final test loss</td><td>0.22029604017734528</td></tr>
+<tr><td>Trainable parameters</td><td>42660</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\parameter_sweep\EXP_020\run_001</td></tr><tr><th>seed</th><td>7</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>cuda</td></tr><tr><th>num_layers</th><td>9</td></tr><tr><th>hidden_features</th><td>64</td></tr></table>
+</details><details class="run" open>
+<summary><strong>parameter_sweep / EXP_021 / run_001 / raw / real_nvp / params__lr1e-3_ep600_bs500_wd0e0_cond1_seed7_layers9_h32</strong> — real_nvp, 
+best validation loss: 0.22336970269680023</summary>
+<div class="plots"><img src="../results/parameter_sweep/EXP_021/run_001/raw/real_nvp/params__lr1e-3_ep600_bs500_wd0e0_cond1_seed7_layers9_h32/loss_curves.png" alt="Loss curves"><img src="../results/parameter_sweep/EXP_021/run_001/raw/real_nvp/params__lr1e-3_ep600_bs500_wd0e0_cond1_seed7_layers9_h32/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>580</td></tr>
+<tr><td>Final train loss</td><td>0.22038264572620392</td></tr>
+<tr><td>Final validation loss</td><td>0.22336970269680023</td></tr>
+<tr><td>Final test loss</td><td>0.22045083343982697</td></tr>
+<tr><td>Trainable parameters</td><td>12132</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\parameter_sweep\EXP_021\run_001</td></tr><tr><th>seed</th><td>7</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>cuda</td></tr><tr><th>num_layers</th><td>9</td></tr><tr><th>hidden_features</th><td>32</td></tr></table>
+</details><details class="run" open>
+<summary><strong>parameter_sweep / EXP_022 / run_001 / raw / real_nvp / params__lr1e-3_ep600_bs500_wd0e0_cond1_seed7_layers9_h64</strong> — real_nvp, 
+best validation loss: 0.22332827746868134</summary>
+<div class="plots"><img src="../results/parameter_sweep/EXP_022/run_001/raw/real_nvp/params__lr1e-3_ep600_bs500_wd0e0_cond1_seed7_layers9_h64/loss_curves.png" alt="Loss curves"><img src="../results/parameter_sweep/EXP_022/run_001/raw/real_nvp/params__lr1e-3_ep600_bs500_wd0e0_cond1_seed7_layers9_h64/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>600</td></tr>
+<tr><td>Final train loss</td><td>0.22057652473449707</td></tr>
+<tr><td>Final validation loss</td><td>0.22332827746868134</td></tr>
+<tr><td>Final test loss</td><td>0.22029604017734528</td></tr>
+<tr><td>Trainable parameters</td><td>42660</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\parameter_sweep\EXP_022\run_001</td></tr><tr><th>seed</th><td>7</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>cuda</td></tr><tr><th>num_layers</th><td>9</td></tr><tr><th>hidden_features</th><td>64</td></tr></table>
+</details><details class="run" open>
+<summary><strong>parameter_sweep / EXP_023 / run_001 / raw / real_nvp / params__lr1e-3_ep600_bs500_wd0e0_cond1_seed7_layers9_h128</strong> — real_nvp, 
+best validation loss: 0.22387266159057617</summary>
+<div class="plots"><img src="../results/parameter_sweep/EXP_023/run_001/raw/real_nvp/params__lr1e-3_ep600_bs500_wd0e0_cond1_seed7_layers9_h128/loss_curves.png" alt="Loss curves"><img src="../results/parameter_sweep/EXP_023/run_001/raw/real_nvp/params__lr1e-3_ep600_bs500_wd0e0_cond1_seed7_layers9_h128/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>580</td></tr>
+<tr><td>Final train loss</td><td>0.22053030133247375</td></tr>
+<tr><td>Final validation loss</td><td>0.22387266159057617</td></tr>
+<tr><td>Final test loss</td><td>0.22053402662277222</td></tr>
+<tr><td>Trainable parameters</td><td>159012</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\parameter_sweep\EXP_023\run_001</td></tr><tr><th>seed</th><td>7</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>cuda</td></tr><tr><th>num_layers</th><td>9</td></tr><tr><th>hidden_features</th><td>128</td></tr></table>
+</details><details class="run" open>
+<summary><strong>parameter_sweep / EXP_024 / run_001 / raw / real_nvp / params__lr1e-3_ep600_bs500_wd0e0_cond1_seed7_layers9_h256</strong> — real_nvp, 
+best validation loss: 0.22277702391147614</summary>
+<div class="plots"><img src="../results/parameter_sweep/EXP_024/run_001/raw/real_nvp/params__lr1e-3_ep600_bs500_wd0e0_cond1_seed7_layers9_h256/loss_curves.png" alt="Loss curves"><img src="../results/parameter_sweep/EXP_024/run_001/raw/real_nvp/params__lr1e-3_ep600_bs500_wd0e0_cond1_seed7_layers9_h256/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>400</td></tr>
+<tr><td>Final train loss</td><td>0.21980226039886475</td></tr>
+<tr><td>Final validation loss</td><td>0.22277702391147614</td></tr>
+<tr><td>Final test loss</td><td>0.2197246104478836</td></tr>
+<tr><td>Trainable parameters</td><td>612900</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\parameter_sweep\EXP_024\run_001</td></tr><tr><th>seed</th><td>7</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>cuda</td></tr><tr><th>num_layers</th><td>9</td></tr><tr><th>hidden_features</th><td>256</td></tr></table>
+</details><details class="run" open>
+<summary><strong>parameter_sweep / EXP_025 / run_002 / raw / transformer / params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks2_lpb1</strong> — transformer, 
+best validation loss: 0.4262217581272125</summary>
+<div class="plots"><img src="../results/parameter_sweep/EXP_025/run_002/raw/transformer/params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks2_lpb1/loss_curves.png" alt="Loss curves"><img src="../results/parameter_sweep/EXP_025/run_002/raw/transformer/params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks2_lpb1/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>540</td></tr>
+<tr><td>Final train loss</td><td>0.4019065201282501</td></tr>
+<tr><td>Final validation loss</td><td>0.4262217581272125</td></tr>
+<tr><td>Final test loss</td><td>0.42858681082725525</td></tr>
+<tr><td>Trainable parameters</td><td>165128</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>data/two_moons_dataset.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\parameter_sweep\EXP_025\run_002</td></tr><tr><th>seed</th><td>7</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0001</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>cuda</td></tr><tr><th>in_channels</th><td>2</td></tr><tr><th>channels</th><td>64</td></tr><tr><th>num_blocks</th><td>2</td></tr><tr><th>layers_per_block</th><td>1</td></tr><tr><th>head_dim</th><td>64</td></tr><tr><th>expansion</th><td>4</td></tr><tr><th>nvp</th><td>True</td></tr></table>
+</details><details class="run" open>
+<summary><strong>parameter_sweep / EXP_026 / run_002 / raw / transformer / params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks6_lpb1</strong> — transformer, 
+best validation loss: 0.09866326302289963</summary>
+<div class="plots"><img src="../results/parameter_sweep/EXP_026/run_002/raw/transformer/params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks6_lpb1/loss_curves.png" alt="Loss curves"><img src="../results/parameter_sweep/EXP_026/run_002/raw/transformer/params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks6_lpb1/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>580</td></tr>
+<tr><td>Final train loss</td><td>0.07903632521629333</td></tr>
+<tr><td>Final validation loss</td><td>0.09866326302289963</td></tr>
+<tr><td>Final test loss</td><td>0.09801279753446579</td></tr>
+<tr><td>Trainable parameters</td><td>495384</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>data/two_moons_dataset.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\parameter_sweep\EXP_026\run_002</td></tr><tr><th>seed</th><td>7</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0001</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>cuda</td></tr><tr><th>in_channels</th><td>2</td></tr><tr><th>channels</th><td>64</td></tr><tr><th>num_blocks</th><td>6</td></tr><tr><th>layers_per_block</th><td>1</td></tr><tr><th>head_dim</th><td>64</td></tr><tr><th>expansion</th><td>4</td></tr><tr><th>nvp</th><td>True</td></tr></table>
+</details><details class="run" open>
+<summary><strong>parameter_sweep / EXP_029 / run_001 / raw / transformer / params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks6_lpb1</strong> — transformer, 
+best validation loss: 0.21059082448482513</summary>
+<div class="plots"><img src="../results/parameter_sweep/EXP_029/run_001/raw/transformer/params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks6_lpb1/loss_curves.png" alt="Loss curves"><img src="../results/parameter_sweep/EXP_029/run_001/raw/transformer/params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks6_lpb1/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>560</td></tr>
+<tr><td>Final train loss</td><td>0.15170007944107056</td></tr>
+<tr><td>Final validation loss</td><td>0.21059082448482513</td></tr>
+<tr><td>Final test loss</td><td>0.19795554876327515</td></tr>
+<tr><td>Trainable parameters</td><td>495384</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>data/two_moons_dataset.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\parameter_sweep\EXP_029\run_001</td></tr><tr><th>seed</th><td>7</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0001</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>cuda</td></tr><tr><th>in_channels</th><td>2</td></tr><tr><th>channels</th><td>64</td></tr><tr><th>num_blocks</th><td>6</td></tr><tr><th>layers_per_block</th><td>1</td></tr><tr><th>head_dim</th><td>16</td></tr><tr><th>expansion</th><td>4</td></tr><tr><th>nvp</th><td>True</td></tr></table>
+</details><details class="run" open>
+<summary><strong>parameter_sweep / EXP_030 / run_001 / raw / transformer / params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks6_lpb1</strong> — transformer, 
+best validation loss: 0.09195630997419357</summary>
+<div class="plots"><img src="../results/parameter_sweep/EXP_030/run_001/raw/transformer/params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks6_lpb1/loss_curves.png" alt="Loss curves"><img src="../results/parameter_sweep/EXP_030/run_001/raw/transformer/params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks6_lpb1/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>400</td></tr>
+<tr><td>Final train loss</td><td>0.07580132782459259</td></tr>
+<tr><td>Final validation loss</td><td>0.09195630997419357</td></tr>
+<tr><td>Final test loss</td><td>0.0929032638669014</td></tr>
+<tr><td>Trainable parameters</td><td>495384</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>data/two_moons_dataset.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\parameter_sweep\EXP_030\run_001</td></tr><tr><th>seed</th><td>7</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0001</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>cuda</td></tr><tr><th>in_channels</th><td>2</td></tr><tr><th>channels</th><td>64</td></tr><tr><th>num_blocks</th><td>6</td></tr><tr><th>layers_per_block</th><td>1</td></tr><tr><th>head_dim</th><td>32</td></tr><tr><th>expansion</th><td>4</td></tr><tr><th>nvp</th><td>True</td></tr></table>
+</details><details class="run" open>
+<summary><strong>parameter_sweep / EXP_032 / run_001 / raw / transformer / params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks6_lpb1</strong> — transformer, 
+best validation loss: 0.07386522740125656</summary>
+<div class="plots"><img src="../results/parameter_sweep/EXP_032/run_001/raw/transformer/params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks6_lpb1/loss_curves.png" alt="Loss curves"><img src="../results/parameter_sweep/EXP_032/run_001/raw/transformer/params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks6_lpb1/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>580</td></tr>
+<tr><td>Final train loss</td><td>0.054660048335790634</td></tr>
+<tr><td>Final validation loss</td><td>0.07386522740125656</td></tr>
+<tr><td>Final test loss</td><td>0.07469744980335236</td></tr>
+<tr><td>Trainable parameters</td><td>396312</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>data/two_moons_dataset.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\parameter_sweep\EXP_032\run_001</td></tr><tr><th>seed</th><td>7</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0001</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>cuda</td></tr><tr><th>in_channels</th><td>2</td></tr><tr><th>channels</th><td>64</td></tr><tr><th>num_blocks</th><td>6</td></tr><tr><th>layers_per_block</th><td>1</td></tr><tr><th>head_dim</th><td>64</td></tr><tr><th>expansion</th><td>2</td></tr><tr><th>nvp</th><td>True</td></tr></table>
+</details><details class="run" open>
+<summary><strong>parameter_sweep / EXP_033 / run_002 / raw / transformer / params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks6_lpb1</strong> — transformer, 
+best validation loss: 0.09045951068401337</summary>
+<div class="plots"><img src="../results/parameter_sweep/EXP_033/run_002/raw/transformer/params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks6_lpb1/loss_curves.png" alt="Loss curves"><img src="../results/parameter_sweep/EXP_033/run_002/raw/transformer/params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks6_lpb1/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>560</td></tr>
+<tr><td>Final train loss</td><td>0.07471540570259094</td></tr>
+<tr><td>Final validation loss</td><td>0.09045951068401337</td></tr>
+<tr><td>Final test loss</td><td>0.09881778061389923</td></tr>
+<tr><td>Trainable parameters</td><td>594456</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>data/two_moons_dataset.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\parameter_sweep\EXP_033\run_002</td></tr><tr><th>seed</th><td>7</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0001</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>cuda</td></tr><tr><th>in_channels</th><td>2</td></tr><tr><th>channels</th><td>64</td></tr><tr><th>num_blocks</th><td>6</td></tr><tr><th>layers_per_block</th><td>1</td></tr><tr><th>head_dim</th><td>64</td></tr><tr><th>expansion</th><td>6</td></tr><tr><th>nvp</th><td>True</td></tr></table>
+</details><details class="run" open>
+<summary><strong>parameter_sweep / EXP_034 / run_001 / raw / transformer / params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks6_lpb1</strong> — transformer, 
+best validation loss: 0.08496131002902985</summary>
+<div class="plots"><img src="../results/parameter_sweep/EXP_034/run_001/raw/transformer/params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks6_lpb1/loss_curves.png" alt="Loss curves"><img src="../results/parameter_sweep/EXP_034/run_001/raw/transformer/params__lr1e-3_ep600_bs500_wd1e-4_cond1_seed7_ch64_blocks6_lpb1/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>580</td></tr>
+<tr><td>Final train loss</td><td>0.06094875559210777</td></tr>
+<tr><td>Final validation loss</td><td>0.08496131002902985</td></tr>
+<tr><td>Final test loss</td><td>0.08440013229846954</td></tr>
+<tr><td>Trainable parameters</td><td>495384</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>data/two_moons_dataset.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results\parameter_sweep\EXP_034\run_001</td></tr><tr><th>seed</th><td>7</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>500</td></tr><tr><th>epochs</th><td>600</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0001</td></tr><tr><th>early_stopping_patience</th><td>6</td></tr><tr><th>evaluation_frequency</th><td>20</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>cuda</td></tr><tr><th>in_channels</th><td>2</td></tr><tr><th>channels</th><td>64</td></tr><tr><th>num_blocks</th><td>6</td></tr><tr><th>layers_per_block</th><td>1</td></tr><tr><th>head_dim</th><td>64</td></tr><tr><th>expansion</th><td>4</td></tr><tr><th>nvp</th><td>True</td></tr></table>
+</details><details class="run" open>
+<summary><strong>raw / real_nvp / params__lr1e-3_ep300_bs32_wd1e-4_cond1_seed7_layers8_h128</strong> — real_nvp, 
+best validation loss: 0.22413714230060577</summary>
+<div class="plots"><img src="../results/raw/real_nvp/params__lr1e-3_ep300_bs32_wd1e-4_cond1_seed7_layers8_h128/loss_curves.png" alt="Loss curves"><img src="../results/raw/real_nvp/params__lr1e-3_ep300_bs32_wd1e-4_cond1_seed7_layers8_h128/parameters.png" alt="Final parameters"></div>
+<table><tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Best epoch</td><td>300</td></tr>
+<tr><td>Final train loss</td><td>0.22139780223369598</td></tr>
+<tr><td>Final validation loss</td><td>0.22413714230060577</td></tr>
+<tr><td>Final test loss</td><td>0.22118480503559113</td></tr>
+<tr><td>Trainable parameters</td><td>141344</td></tr>
+</table>
+<table><tr><th>Final configuration</th><th>Value</th></tr><tr><th>dataset_path</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\two_moons_splits.pt</td></tr><tr><th>output_dir</th><td>C:\Users\amanp\OneDrive\Desktop\Uli_Projects_Attempts\Uli_Two_Moon_2\results</td></tr><tr><th>seed</th><td>7</td></tr><tr><th>conditional</th><td>True</td></tr><tr><th>batch_size</th><td>32</td></tr><tr><th>epochs</th><td>300</td></tr><tr><th>learning_rate</th><td>0.001</td></tr><tr><th>weight_decay</th><td>0.0001</td></tr><tr><th>early_stopping_patience</th><td>3</td></tr><tr><th>evaluation_frequency</th><td>50</td></tr><tr><th>points_per_batch</th><td>500</td></tr><tr><th>dataset_num_batches</th><td>512</td></tr><tr><th>noise</th><td>0.05</td></tr><tr><th>plot_batches</th><td>32</td></tr><tr><th>device</th><td>None</td></tr><tr><th>num_layers</th><td>8</td></tr><tr><th>hidden_features</th><td>128</td></tr></table>
+</details>
+</body></html>

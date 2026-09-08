@@ -20,3 +20,17 @@ The full experiment comparisons are available as separate, cleaner charts:
 
 - [`transformer_nll_by_experiment.png`](transformer_nll_by_experiment.png)
 - [`realnvp_nll_by_experiment.png`](realnvp_nll_by_experiment.png)
+
+## All training runs
+
+For a single browsable view of every completed training run, open
+[`../all_training_overview.html`](../all_training_overview.html). It includes
+each run's final configuration, final metrics, parameter plot, and loss curves.
+The combined loss-curve image is [`../all_training_loss_curves.png`](../all_training_loss_curves.png),
+and the machine-readable table is [`../all_training_parameters.csv`](../all_training_parameters.csv).
+
+Regenerate these files after adding new results with:
+
+```bash
+python Analysis/generate_training_overview.py
+```
