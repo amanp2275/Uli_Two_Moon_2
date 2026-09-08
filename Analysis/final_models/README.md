@@ -34,3 +34,17 @@ Regenerate these files after adding new results with:
 ```bash
 python Analysis/generate_training_overview.py
 ```
+
+## Organized model plots
+
+The model-specific plots are separated by model and sweep type:
+
+- Parameter sweeps: [Transformer loss curves](../organized_plots/parameter_sweep/transformer_loss_curves_by_experiment_type.png), [RealNVP loss curves](../organized_plots/parameter_sweep/real_nvp_loss_curves_by_experiment_type.png)
+- Model sweeps: [Transformer loss curves](../organized_plots/model_sweep/transformer_loss_curves_by_experiment_type.png), [RealNVP loss curves](../organized_plots/model_sweep/real_nvp_loss_curves_by_experiment_type.png)
+- Matching final-parameter summaries are in the same folders, named `*_parameters_by_experiment_type.png`.
+
+Regenerate them with:
+
+```bash
+python Analysis/generate_organized_model_plots.py
+```

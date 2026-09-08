@@ -7,6 +7,7 @@
 "EXP_006","Learning-rate sweep","transformer","0.0005","0.0001","","","","","","","completed","580","0.18517306447029114","0.18406011164188385","0.18406011164188385","726.316707",""
 "EXP_007","Learning-rate sweep","transformer","0.0001","0.0001","","","","","","","completed","600","0.35920828580856323","0.36109405755996704","0.36109405755996704","732.570055",""
 "EXP_008","Learning-rate sweep","transformer","0.00005","0.0001","","","","","","","completed","600","0.5608579516410828","0.5622392892837524","0.5622392892837524","715.865940",""
+
 "EXP_009","Weight-decay sweep","real_nvp","0.001","0","5","64","","","","","completed","600","0.226769357919693","0.22393448650836945","0.22393448650836945","74.580955",""
 "EXP_010","Weight-decay sweep","real_nvp","0.001","1e-05","5","64","","","","","completed","600","0.22864492237567902","0.22560429573059082","0.22560429573059082","69.155846",""
 "EXP_011","Weight-decay sweep","real_nvp","0.001","0.0001","5","64","","","","","completed","580","0.22872644662857056","0.22633621096611023","0.22633621096611023","67.772093",""
@@ -15,6 +16,7 @@
 "EXP_014","Weight-decay sweep","transformer","0.001","1e-05","","","4","1","64","4","completed","600","0.15277205407619476","0.1538943201303482","0.1538943201303482","717.385206",""
 "EXP_015","Weight-decay sweep","transformer","0.001","0.0001","","","4","1","64","4","completed","540","0.1416914016008377","0.14332658052444458","0.14332658052444458","715.677112",""
 "EXP_016","Weight-decay sweep","transformer","0.001","0.001","","","4","1","64","4","completed","580","0.1746838241815567","0.17571872472763062","0.17571872472763062","722.799868",""
+
 "EXP_017","RealNVP architecture sweep","real_nvp","0.001","0","3","64","","","","","completed","580","0.2719683051109314","0.2681090235710144","0.2681090235710144","58.869953",""
 "EXP_019","RealNVP architecture sweep","real_nvp","0.001","0","7","64","","","","","completed","580","0.22705672681331635","0.22384968400001526","0.22384968400001526","81.890031",""
 "EXP_020","RealNVP architecture sweep","real_nvp","0.001","0","9","64","","","","","completed","600","0.22332827746868134","0.22029604017734528","0.22029604017734528","97.747689",""
@@ -22,6 +24,7 @@
 "EXP_022","RealNVP architecture sweep","real_nvp","0.001","0","9","64","","","","","completed","600","0.22332827746868134","0.22029604017734528","0.22029604017734528","97.582744",""
 "EXP_023","RealNVP architecture sweep","real_nvp","0.001","0","9","128","","","","","completed","580","0.22387266159057617","0.22053402662277222","0.22053402662277222","160.114599",""
 "EXP_024","RealNVP architecture sweep","real_nvp","0.001","0","9","256","","","","","completed","400","0.22277702391147614","0.2197246104478836","0.2197246104478836","1374.913805",""
+
 "EXP_025","Transformer block-count sweep","transformer","0.001","0.0001","","","2","1","64","4","failed","","","","","0.000014","ValueError: experiment_type must be parameter_sweep or model_comparison"
 "EXP_026","Transformer block-count sweep","transformer","0.001","0.0001","","","6","1","64","4","failed","","","","","0.000009","ValueError: experiment_type must be parameter_sweep or model_comparison"
 "EXP_027","Transformer block-count sweep","transformer","0.001","0.0001","","","8","1","64","4","failed","","","","","0.000007","ValueError: experiment_type must be parameter_sweep or model_comparison"
@@ -30,18 +33,21 @@
 "EXP_026","Transformer block-count sweep","transformer","0.001","0.0001","","","6","1","64","4","completed","580","0.09866326302289963","0.09801279753446579","0.09801279753446579","3904.385168",""
 "EXP_027","Transformer block-count sweep","transformer","0.001","0.0001","","","8","1","64","4","failed","","","","","3.912658","OutOfMemoryError: CUDA out of memory. Tried to allocate 200.00 MiB. GPU 0 has a total capacity of 4.00 GiB of which 0 bytes is free. Of the allocated memory 6.57 GiB is allocated by PyTorch, and 65.27 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)"
 "EXP_028","Transformer block-count sweep","transformer","0.001","0.0001","","","10","1","64","4","failed","","","","","2.787417","OutOfMemoryError: CUDA out of memory. Tried to allocate 200.00 MiB. GPU 0 has a total capacity of 4.00 GiB of which 0 bytes is free. Of the allocated memory 6.57 GiB is allocated by PyTorch, and 66.18 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)"
+
 "EXP_029","Transformer head-dimension sweep","transformer","0.001","0.0001","","","6","1","16","4","completed","560","0.21059082448482513","0.19795554876327515","0.19795554876327515","6475.258879",""
 "EXP_030","Transformer head-dimension sweep","transformer","0.001","0.0001","","","6","1","32","4","completed","400","0.09195630997419357","0.0929032638669014","0.0929032638669014","3535.943876",""
 "EXP_031","Transformer head-dimension sweep","transformer","0.001","0.0001","","","6","1","128","4","failed","","","","","0.009270","AssertionError: "
 "EXP_031","Transformer head-dimension sweep","transformer","0.001","0.0001","","","6","1","128","4","failed","","","","","0.038016","AssertionError: "
 "EXP_032","Transformer expansion sweep","transformer","0.001","0.0001","","","6","1","64","2","completed","580","0.07386522740125656","0.07469744980335236","0.07469744980335236","1435.042175",""
 "EXP_033","Transformer expansion sweep","transformer","0.001","0.0001","","","6","1","64","8","failed","","","","","1.986755","RuntimeError: CUDA error: out of memory
+
 CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
 For debugging consider passing CUDA_LAUNCH_BLOCKING=1
 Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
 "
 "EXP_031","Transformer head-dimension sweep","transformer","0.001","0.0001","","","6","1","128","4","failed","","","","","0.051357","AssertionError: "
 "EXP_031","Transformer head-dimension sweep","transformer","0.001","0.0001","","","6","1","128","4","failed","","","","","0.017730","AssertionError: "
+
 "EXP_033","Transformer expansion sweep","transformer","0.001","0.0001","","","6","1","64","6","completed","560","0.09045951068401337","0.09881778061389923","0.09881778061389923","5630.214183",""
 "EXP_034","Transformer expansion sweep","transformer","0.001","0.0001","","","6","1","64","4","completed","580","0.08496131002902985","0.08440013229846954","0.08440013229846954","4708.974370",""
 "EXP_035","Transformer expansion sweep","transformer","0.001","0.0001","","","6","2","64","6","failed","","","","","10.245278","OutOfMemoryError: CUDA out of memory. Tried to allocate 300.00 MiB. GPU 0 has a total capacity of 4.00 GiB of which 0 bytes is free. Of the allocated memory 6.53 GiB is allocated by PyTorch, and 43.39 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)"
