@@ -6,7 +6,7 @@ import csv
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 REGISTRY = ROOT / "results" / "experiment_results.csv"
 OUTPUT = ROOT / "Analysis" / "tables" / "parameter_sweep" / "real_nvp"
 
