@@ -1,0 +1,6 @@
+experiment_id,seed,run,conditional,batch_size,epochs,early_stopping_patience,evaluation_frequency,points_per_batch,dataset_num_batches,noise,plot_batches,device,dataset_path,real_nvp_learning_rate,real_nvp_weight_decay,real_nvp_num_layers,real_nvp_hidden_features,transformer_learning_rate,transformer_weight_decay,transformer_in_channels,transformer_channels,transformer_num_blocks,transformer_layers_per_block,transformer_head_dim,transformer_expansion,transformer_nvp,notes
+EXP_MS_001,7,NO,YES,500,600,6,20,500,512,0.05,32,,two_moons_splits.pt,0.001,0,9,256,0.001,0.0001,2,64,6,1,64,2,YES,seed 7 reference comparison already completed
+EXP_MS_002,17,NO,YES,500,600,6,20,500,512,0.05,32,,two_moons_splits.pt,0.001,0,9,256,0.001,0.0001,2,64,6,1,64,2,YES,final model comparison seed 17
+EXP_MS_003,27,NO,YES,500,600,6,20,500,512,0.05,32,,two_moons_splits.pt,0.001,0,9,256,0.001,0.0001,2,64,6,1,64,2,YES,final model comparison seed 27
+EXP_MS_004,37,NO,YES,500,600,6,20,500,512,0.05,32,,two_moons_splits.pt,0.001,0,9,256,0.001,0.0001,2,64,6,1,64,2,YES,final model comparison seed 37
+EXP_MS_005,47,NO,YES,500,600,6,20,500,512,0.05,32,,two_moons_splits.pt,0.001,0,9,256,0.001,0.0001,2,64,6,1,64,2,YES,final model comparison seed 47

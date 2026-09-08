@@ -147,6 +147,14 @@ def publish_nll_group(results_root, model_name: str, config, final_test_loss: fl
     return destination
 
 
+def publish_model_comparison(results_root, runs: dict[str, Path]) -> Path:
+    """Publish finalized model runs under one named model-sweep folder."""
+    destination = Path(results_root) / "final_models"
+    for model_name, source in runs.items():
+        _replace_directory(Path(source), destination / model_name)
+    return destination
+
+
 def save_config(config, path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(config_dict(config), indent=2), encoding="utf-8")
