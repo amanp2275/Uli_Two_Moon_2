@@ -24,6 +24,7 @@ import matplotlib.pyplot as plt
 ROOT = Path(__file__).resolve().parents[2]
 RESULTS = ROOT / "results"
 OUTPUT = ROOT / "Analysis"
+ORGANIZED_PLOTS = OUTPUT / "organized_plots"
 
 
 def _label(metrics_path: Path) -> str:
@@ -111,6 +112,30 @@ def _write_loss_overview(runs: list[dict]) -> None:
     plt.close(figure)
 
 
+def _organized_plot_gallery() -> str:
+    groups: dict[str, list[Path]] = {}
+    for plot_path in sorted(ORGANIZED_PLOTS.rglob("*.png")):
+        relative = plot_path.relative_to(ORGANIZED_PLOTS)
+        group = relative.parts[0] if len(relative.parts) > 1 else "other"
+        groups.setdefault(group, []).append(plot_path)
+
+    sections = []
+    for group, plot_paths in groups.items():
+        images = []
+        for plot_path in plot_paths:
+            relative = Path(os.path.relpath(plot_path, OUTPUT)).as_posix()
+            title = plot_path.stem.replace("_", " ")
+            images.append(
+                f'<figure><img src="{html.escape(relative)}" alt="{html.escape(title)}">'
+                f"<figcaption>{html.escape(title)}</figcaption></figure>"
+            )
+        sections.append(
+            f"<h3>{html.escape(group.replace('_', ' ').title())}</h3>"
+            f'<div class="gallery">{"".join(images)}</div>'
+        )
+    return "".join(sections)
+
+
 def _write_html(runs: list[dict]) -> None:
     cards = []
     for run in runs:
@@ -138,6 +163,7 @@ best validation loss: {html.escape(str(metrics.get('best_validation_loss', '')))
 <table><tr><th>Final configuration</th><th>Value</th></tr>{''.join(config_rows)}</table>
 </details>"""
         )
+    gallery = _organized_plot_gallery()
     page = f"""<!doctype html>
 <html><head><meta charset="utf-8"><title>All training overview</title>
 <style>
@@ -148,6 +174,10 @@ h1 {{ margin-bottom: .25rem; }}
 summary {{ cursor: pointer; font-size: 1.05rem; }}
 .plots {{ display: flex; flex-wrap: wrap; gap: 1rem; margin: 1rem 0; }}
 .plots img {{ max-width: 48%; min-width: 360px; height: auto; border: 1px solid #ddd; }}
+.gallery {{ display: flex; flex-wrap: wrap; gap: 1rem; margin: 1rem 0 2rem; }}
+.gallery figure {{ margin: 0; width: min(48%, 720px); }}
+.gallery img {{ display: block; width: 100%; height: auto; border: 1px solid #ddd; }}
+figcaption {{ margin-top: .35rem; font-size: .9rem; color: #555; }}
 table {{ border-collapse: collapse; margin: .75rem 0; }}
 th, td {{ border: 1px solid #ddd; padding: .3rem .55rem; text-align: left; }}
 th {{ background: #f3f3f3; }}
@@ -156,6 +186,8 @@ th {{ background: #f3f3f3; }}
 <p>{len(runs)} completed runs discovered from <code>results/**/metrics.json</code>.</p>
 <p class="links"><a href="all_training_loss_curves.png">Combined loss curves</a> ·
 <a href="all_training_parameters.csv">Parameters and final metrics CSV</a></p>
+<h2>Analysis plots</h2>
+{gallery or '<p>No organized analysis plots found.</p>'}
 {''.join(cards)}
 </body></html>"""
     (OUTPUT / "all_training_overview.html").write_text(page, encoding="utf-8")
