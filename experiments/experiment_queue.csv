@@ -41,3 +41,6 @@ EXP_040,parameter_sweep,transformer,0.0001,500,600,7,YES,0,6,20,500,512,0.05,32,
 EXP_041,parameter_sweep,transformer,0.0001,500,600,7,YES,0,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,6,1,16,4,YES,selected configuration,YES
 EXP_042,parameter_sweep,transformer,0.0001,500,600,7,YES,0.001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,2,1,16,2,YES,selected configuration,YES
 EXP_043,parameter_sweep,transformer,0.0001,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,6,1,16,4,YES,selected configuration,YES
+EXP_044,parameter_sweep,transformer,0.00025,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,6,1,16,4,YES,middle learning rate stability test,YES
+EXP_045,parameter_sweep,transformer,0.00025,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,6,1,16,4,YES,post-loss-and-generation-fix verification,YES
+EXP_046,parameter_sweep,transformer,0.00025,500,1000,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,6,1,16,4,YES,post-fix extended 1000-epoch verification,YES

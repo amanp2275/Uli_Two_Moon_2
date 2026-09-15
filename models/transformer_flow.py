@@ -327,10 +327,11 @@ class Model(torch.nn.Module):
 
     def get_loss(self, z: torch.Tensor, logdets: torch.Tensor):
         """Return mean negative log-likelihood per coordinate."""
-        base_nll = 0.5 * z.pow(2).sum(dim=-1) + 0.5 * torch.log(
+        # Apply the Gaussian normalization constant to every latent coordinate.
+        base_nll = 0.5 * z.pow(2) + 0.5 * torch.log(
             torch.tensor(2.0 * torch.pi, device=z.device, dtype=z.dtype)
         )
-        sequence_nll = base_nll.sum(dim=-1) - logdets
+        sequence_nll = base_nll.sum(dim=[1, 2]) - logdets
         return sequence_nll.mean() / (z.size(1) * z.size(2))
 
     def reverse(
@@ -342,9 +343,23 @@ class Model(torch.nn.Module):
         attn_temp: float = 1.0,
         annealed_guidance: bool = False,
         return_sequence: bool = False,
+        latent_var: float | torch.Tensor | None = None,
     ) -> torch.Tensor | list[torch.Tensor]:
+        """Decode latent samples, optionally overriding the prior variance.
+
+        When ``latent_var`` is omitted, use the model's existing learned prior
+        variance. Passing ``1.0`` uses a standard-normal latent distribution;
+        a scalar or broadcastable tensor can be supplied for alternative
+        generation-time variance.
+        """
         seq = [self.unpatchify(x)]
-        x = x * self.var.sqrt()
+        if latent_var is None:
+            variance = self.var
+        else:
+            variance = torch.as_tensor(latent_var, device=x.device, dtype=x.dtype)
+        if torch.any(variance <= 0):
+            raise ValueError("latent_var must be strictly positive")
+        x = x * variance.sqrt()
         for block in reversed(self.blocks):
             x = block.reverse(x, y, guidance, guide_what, attn_temp, annealed_guidance)
             seq.append(self.unpatchify(x))

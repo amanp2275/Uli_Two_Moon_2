@@ -1,0 +1,4 @@
+# Keep generated Optuna databases, CSVs, JSON, and plots local.
+*
+!.gitignore
+
