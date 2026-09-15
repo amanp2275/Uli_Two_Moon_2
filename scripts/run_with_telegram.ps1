@@ -18,17 +18,28 @@ catch {
 
 $status = if ($exitCode -eq 0) { "completed successfully" } else { "failed (exit code $exitCode)" }
 $duration = ((Get-Date) - $started).ToString("hh\:mm\:ss")
-$token = [Environment]::GetEnvironmentVariable("TELEGRAM_BOT_TOKEN", "User")
-$chatId = [Environment]::GetEnvironmentVariable("TELEGRAM_CHAT_ID", "User")
+$token = $env:TELEGRAM_BOT_TOKEN
+$chatId = $env:TELEGRAM_CHAT_ID
+if ([string]::IsNullOrWhiteSpace($token)) {
+  $token = [Environment]::GetEnvironmentVariable("TELEGRAM_BOT_TOKEN", "User")
+}
+if ([string]::IsNullOrWhiteSpace($chatId)) {
+  $chatId = [Environment]::GetEnvironmentVariable("TELEGRAM_CHAT_ID", "User")
+}
 
 if (-not [string]::IsNullOrWhiteSpace($token) -and -not [string]::IsNullOrWhiteSpace($chatId)) {
-  Invoke-RestMethod `
-    -Uri "https://api.telegram.org/bot$token/sendMessage" `
-    -Method Post `
-    -Body @{
-      chat_id = $chatId
-      text = "RealNVP/Transformer run ($Model) $status.`nDuration: $duration"
-    } | Out-Null
+  try {
+    Invoke-RestMethod `
+      -Uri "https://api.telegram.org/bot$token/sendMessage" `
+      -Method Post `
+      -Body @{
+        chat_id = $chatId
+        text = "RealNVP/Transformer run ($Model) $status.`nDuration: $duration"
+      } | Out-Null
+  }
+  catch {
+    Write-Warning "Telegram notification failed: $($_.Exception.Message)"
+  }
 }
 else {
   Write-Warning "Telegram environment variables are missing; no notification was sent."
