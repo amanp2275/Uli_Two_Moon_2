@@ -44,3 +44,7 @@ EXP_043,parameter_sweep,transformer,0.0001,500,600,7,YES,0.0001,6,20,500,512,0.0
 EXP_044,parameter_sweep,transformer,0.00025,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,6,1,16,4,YES,middle learning rate stability test,YES
 EXP_045,parameter_sweep,transformer,0.00025,500,600,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,6,1,16,4,YES,post-loss-and-generation-fix verification,YES
 EXP_046,parameter_sweep,transformer,0.00025,500,1000,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,6,1,16,4,YES,post-fix extended 1000-epoch verification,YES
+EXP_047,parameter_sweep,transformer,0.00025,500,1000,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,6,1,16,4,YES,experiment 47 extended 1000-epoch run,YES
+EXP_048,parameter_sweep,transformer,0.00025,500,1000,7,YES,0.0,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,6,1,16,4,YES,experiment 48 extended 1000-epoch run,YES
+EXP_049,parameter_sweep,transformer,0.00025,500,1000,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,6,1,16,4,YES,rerun of EXP_047 with learned self.var enabled,YES
+EXP_050,parameter_sweep,transformer,0.00025,500,1000,7,YES,0.0,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,6,1,16,4,YES,rerun of EXP_048 with learned self.var enabled,YES

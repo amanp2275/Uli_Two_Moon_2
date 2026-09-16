@@ -94,7 +94,7 @@ def train_model(model: torch.nn.Module, config, model_name: str) -> TrainingResu
             test_loss = model.get_loss(test_z, test_logdet).item()
             generated_labels = test_labels[:config.plot_batches] if config.conditional else None
             generated = model.reverse(
-                torch.randn_like(test_x[:config.plot_batches]), generated_labels, latent_var=1.0
+                torch.randn_like(test_x[:config.plot_batches]), generated_labels
             )
             generated = generated * std + mean
         validation_losses.append(validation_loss)
@@ -134,7 +134,7 @@ def train_model(model: torch.nn.Module, config, model_name: str) -> TrainingResu
         final_test_loss = model.get_loss(final_test_z, final_test_logdet).item()
         final_generated_labels = splits.test_labels[:config.plot_batches] if config.conditional else None
         final_generated = model.reverse(
-            torch.randn_like(test_x[:config.plot_batches]), final_generated_labels, latent_var=1.0
+            torch.randn_like(test_x[:config.plot_batches]), final_generated_labels
         )
         final_generated = final_generated * std + mean
     save_samples_plot(

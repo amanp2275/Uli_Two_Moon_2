@@ -326,10 +326,11 @@ class Model(torch.nn.Module):
         self.var.lerp_(z2.detach(), weight=self.VAR_LR)
 
     def get_loss(self, z: torch.Tensor, logdets: torch.Tensor):
-        """Return mean negative log-likelihood per coordinate."""
-        # Apply the Gaussian normalization constant to every latent coordinate.
-        base_nll = 0.5 * z.pow(2) + 0.5 * torch.log(
-            torch.tensor(2.0 * torch.pi, device=z.device, dtype=z.dtype)
+        """Return mean negative log-likelihood per coordinate using the learned prior variance."""
+        variance = self.var.to(device=z.device, dtype=z.dtype).clamp_min(1e-6)
+        base_nll = 0.5 * (
+            z.pow(2) / variance
+            + torch.log(2.0 * torch.pi * variance)
         )
         sequence_nll = base_nll.sum(dim=[1, 2]) - logdets
         return sequence_nll.mean() / (z.size(1) * z.size(2))
