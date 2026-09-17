@@ -256,7 +256,7 @@ class MetaBlock(torch.nn.Module):
 
 
 class Model(torch.nn.Module):
-    VAR_LR: float = 0.1
+    VAR_LR: float = 0.01
     var: torch.Tensor
 
     def __init__(
