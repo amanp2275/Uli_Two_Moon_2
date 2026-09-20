@@ -48,5 +48,9 @@ EXP_047,parameter_sweep,transformer,0.00025,500,1000,7,YES,0.0001,6,20,500,512,0
 EXP_048,parameter_sweep,transformer,0.00025,500,1000,7,YES,0.0,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,6,1,16,4,YES,experiment 48 extended 1000-epoch run,YES
 EXP_049,parameter_sweep,transformer,0.00025,500,1000,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,6,1,16,4,YES,rerun of EXP_047 with learned self.var enabled,YES
 EXP_050,parameter_sweep,transformer,0.00025,500,1000,7,YES,0.0,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,6,1,16,4,YES,rerun of EXP_048 with learned self.var enabled,YES
-EXP_051,parameter_sweep,transformer,0.00025,500,1000,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,6,1,16,4,YES,rerun of EXP_049 with self.var VAR_LR=0.01,YES
-EXP_052,parameter_sweep,transformer,0.00025,500,1000,7,YES,0.0,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,6,1,16,4,YES,rerun of EXP_050 with self.var VAR_LR=0.01,YES
+EXP_051,parameter_sweep,transformer,0.00025,500,1000,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,2,1,16,4,YES,rerun of EXP_049 with self.var VAR_LR=0.01 and two transformer blocks,YES
+EXP_052,parameter_sweep,transformer,0.0005,500,1000,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,2,1,16,4,YES,same as EXP_051 with learning rate changed to 0.0005,YES
+EXP_053,parameter_sweep,transformer,0.001,500,1000,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,2,1,16,4,YES,same as EXP_051 with learning rate changed to 0.001,YES
+EXP_054,parameter_sweep,transformer,0.00001,500,1000,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,2,1,16,4,YES,same as EXP_051 with learning rate changed to 0.00001,YES
+EXP_055,parameter_sweep,transformer,0.0005,500,1000,7,YES,0.001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,2,1,16,4,YES,same as EXP_052 with weight decay changed to 0.001,YES
+EXP_056,parameter_sweep,transformer,0.0005,500,1000,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,2,1,16,4,YES,same as EXP_052 with weight decay 0.0001,YES
