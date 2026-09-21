@@ -54,3 +54,5 @@ EXP_053,parameter_sweep,transformer,0.001,500,1000,7,YES,0.0001,6,20,500,512,0.0
 EXP_054,parameter_sweep,transformer,0.00001,500,1000,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,2,1,16,4,YES,same as EXP_051 with learning rate changed to 0.00001,YES
 EXP_055,parameter_sweep,transformer,0.0005,500,1000,7,YES,0.001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,2,1,16,4,YES,same as EXP_052 with weight decay changed to 0.001,YES
 EXP_056,parameter_sweep,transformer,0.0005,500,1000,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,2,1,16,4,YES,same as EXP_052 with weight decay 0.0001,YES
+EXP_057,parameter_sweep,transformer,0.0005,500,1000,7,YES,0.00001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,2,1,16,4,YES,same as EXP_056 with weight decay changed to 0.00001,YES
+EXP_058,parameter_sweep,transformer,0.0005,500,1000,7,YES,0.0001,6,20,500,512,0.05,32,cuda,data/two_moons_dataset.pt,,,2,64,2,3,16,4,YES,same as EXP_056 with layers per block increased to 3,YES
